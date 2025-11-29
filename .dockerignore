@@ -1,0 +1,35 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+app/bin/
+app/lib/
+app/lib64
+app/include/
+app/pyvenv.cfg
+
+# Git
+.git/
+.gitignore
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Docs
+*.md
+!app/README.md
+
+# Images
+*.png
+*.jpg
+Imagens/
+
+# Outros
+.amazonq/
+.terraform/
+*.tfstate

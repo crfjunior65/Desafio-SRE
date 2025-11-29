@@ -1,0 +1,29 @@
+---
+kind: Cluster
+apiVersion: kind.x-k8s.io/v1alpha4
+name: desafio-sre
+
+# Configuração de nodes
+nodes:
+  # Control plane (master)
+  - role: control-plane
+    kubeadmConfigPatches:
+      - |
+        kind: InitConfiguration
+        nodeRegistration:
+          kubeletExtraArgs:
+            node-labels: "ingress-ready=true"
+    extraPortMappings:
+      # Porta 80 para Ingress HTTP
+      - containerPort: 80
+        hostPort: 80
+        protocol: TCP
+      # Porta 443 para Ingress HTTPS
+      - containerPort: 443
+        hostPort: 443
+        protocol: TCP
+
+  # Worker nodes
+  - role: worker
+  - role: worker
+  - role: worker

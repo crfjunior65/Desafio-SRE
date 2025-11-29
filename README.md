@@ -2,9 +2,14 @@
 
 ## PRIMEIRA SEMANA:
 
-Desafio 0 - Fazer o fork do repositório em um repositório privado seu
+Desafio 0 - Fazer o fork do repositório em um repositório privado seu - Ok
 
-Desafio 1 - Rodar essa aplicação na sua maquina
+Desafio 1 - Rodar essa aplicação na sua maquina -
+### Obstaculos
+ - Aplicação em Python
+   - ![alt text](Imagens/image.png)
+ -
+
 
 Desafio 2 - Dockernizar essa aplicação e provisionar
 
