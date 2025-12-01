@@ -1,0 +1,165 @@
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: desafio-sre
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: app-config
+  namespace: desafio-sre
+data:
+  REDIS_HOST: "REPLACE_WITH_REDIS_ENDPOINT"
+  REDIS_PORT: "6379"
+  REDIS_SSL: "true"
+  POSTGRES_HOST: "REPLACE_WITH_RDS_ENDPOINT"
+  POSTGRES_PORT: "5432"
+  POSTGRES_DB: "desafiosre"
+  POSTGRES_USER: "admin"
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: app-secrets
+  namespace: desafio-sre
+type: Opaque
+stringData:
+  POSTGRES_PASSWORD: "REPLACE_WITH_RDS_PASSWORD"
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: flask-app
+  namespace: desafio-sre
+  labels:
+    app: flask-app
+    version: v2.0
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: flask-app
+  template:
+    metadata:
+      labels:
+        app: flask-app
+        version: v2.0
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "9999"
+        prometheus.io/path: "/metrics"
+    spec:
+      containers:
+        - name: flask-app
+          image: REPLACE_WITH_DOCKERHUB_IMAGE
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 5000
+              name: http
+              protocol: TCP
+            - containerPort: 9999
+              name: metrics
+              protocol: TCP
+          env:
+            - name: REDIS_HOST
+              valueFrom:
+                configMapKeyRef:
+                  name: app-config
+                  key: REDIS_HOST
+            - name: REDIS_PORT
+              valueFrom:
+                configMapKeyRef:
+                  name: app-config
+                  key: REDIS_PORT
+            - name: REDIS_SSL
+              valueFrom:
+                configMapKeyRef:
+                  name: app-config
+                  key: REDIS_SSL
+            - name: POSTGRES_HOST
+              valueFrom:
+                configMapKeyRef:
+                  name: app-config
+                  key: POSTGRES_HOST
+            - name: POSTGRES_PORT
+              valueFrom:
+                configMapKeyRef:
+                  name: app-config
+                  key: POSTGRES_PORT
+            - name: POSTGRES_DB
+              valueFrom:
+                configMapKeyRef:
+                  name: app-config
+                  key: POSTGRES_DB
+            - name: POSTGRES_USER
+              valueFrom:
+                configMapKeyRef:
+                  name: app-config
+                  key: POSTGRES_USER
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: app-secrets
+                  key: POSTGRES_PASSWORD
+          resources:
+            requests:
+              cpu: 100m
+              memory: 128Mi
+            limits:
+              cpu: 500m
+              memory: 512Mi
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 5000
+            initialDelaySeconds: 30
+            periodSeconds: 10
+            timeoutSeconds: 5
+            failureThreshold: 3
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: 5000
+            initialDelaySeconds: 10
+            periodSeconds: 5
+            timeoutSeconds: 3
+            failureThreshold: 3
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: flask-app-service
+  namespace: desafio-sre
+  labels:
+    app: flask-app
+spec:
+  type: LoadBalancer
+  selector:
+    app: flask-app
+  ports:
+    - port: 80
+      targetPort: 5000
+      protocol: TCP
+      name: http
+    - port: 9999
+      targetPort: 9999
+      protocol: TCP
+      name: metrics
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: flask-app-metrics
+  namespace: desafio-sre
+  labels:
+    app: flask-app
+spec:
+  type: ClusterIP
+  selector:
+    app: flask-app
+  ports:
+    - port: 9999
+      targetPort: 9999
+      protocol: TCP
+      name: metrics

@@ -1,0 +1,95 @@
+terraform {
+  required_version = ">= 1.5"
+  required_providers {
+    aws = {
+      source  = "hashicorp/aws"
+      version = "~> 5.0"
+    }
+  }
+}
+
+provider "aws" {
+  region = var.region
+}
+
+data "terraform_remote_state" "vpc" {
+  backend = "s3"
+  config = {
+    bucket = var.state_bucket
+    key    = "vpc/terraform.tfstate"
+    region = var.region
+  }
+}
+
+data "terraform_remote_state" "security_groups" {
+  backend = "s3"
+  config = {
+    bucket = var.state_bucket
+    key    = "security-groups/terraform.tfstate"
+    region = var.region
+  }
+}
+
+resource "aws_opensearch_domain" "main" {
+  domain_name    = "${var.project_name}-opensearch"
+  engine_version = "OpenSearch_${var.opensearch_version}"
+
+  cluster_config {
+    instance_type          = var.opensearch_instance_type
+    instance_count         = 2
+    zone_awareness_enabled = true
+    zone_awareness_config {
+      availability_zone_count = 2
+    }
+  }
+
+  vpc_options {
+    subnet_ids         = slice(data.terraform_remote_state.vpc.outputs.private_subnet_ids, 0, 2)
+    security_group_ids = [data.terraform_remote_state.security_groups.outputs.opensearch_sg_id]
+  }
+
+  ebs_options {
+    ebs_enabled = true
+    volume_size = 20
+    volume_type = "gp3"
+  }
+
+  encrypt_at_rest {
+    enabled = true
+  }
+
+  node_to_node_encryption {
+    enabled = true
+  }
+
+  domain_endpoint_options {
+    enforce_https       = true
+    tls_security_policy = "Policy-Min-TLS-1-2-2019-07"
+  }
+
+  advanced_security_options {
+    enabled                        = true
+    internal_user_database_enabled = true
+    master_user_options {
+      master_user_name     = "admin"
+      master_user_password = var.opensearch_master_password
+    }
+  }
+
+  access_policies = jsonencode({
+    Version = "2012-10-17"
+    Statement = [{
+      Effect = "Allow"
+      Principal = {
+        AWS = "*"
+      }
+      Action   = "es:*"
+      Resource = "arn:aws:es:${var.region}:*:domain/${var.project_name}-opensearch/*"
+    }]
+  })
+
+  tags = {
+    Name        = "${var.project_name}-opensearch"
+    Environment = var.environment
+  }
+}

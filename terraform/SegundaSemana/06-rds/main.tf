@@ -1,0 +1,62 @@
+terraform {
+  required_version = ">= 1.5"
+  required_providers {
+    aws = {
+      source  = "hashicorp/aws"
+      version = "~> 5.0"
+    }
+  }
+}
+
+provider "aws" {
+  region = var.region
+}
+
+data "terraform_remote_state" "vpc" {
+  backend = "s3"
+  config = {
+    bucket = var.state_bucket
+    key    = "vpc/terraform.tfstate"
+    region = var.region
+  }
+}
+
+data "terraform_remote_state" "security_groups" {
+  backend = "s3"
+  config = {
+    bucket = var.state_bucket
+    key    = "security-groups/terraform.tfstate"
+    region = var.region
+  }
+}
+
+resource "aws_db_subnet_group" "main" {
+  name       = "${var.project_name}-rds-subnet-group"
+  subnet_ids = data.terraform_remote_state.vpc.outputs.private_subnet_ids
+  tags = {
+    Name        = "${var.project_name}-rds-subnet-group"
+    Environment = var.environment
+  }
+}
+
+resource "aws_db_instance" "main" {
+  identifier                  = "${var.project_name}-rds"
+  engine                      = var.rds_engine
+  engine_version              = var.rds_engine_version
+  instance_class              = var.rds_instance_class
+  allocated_storage           = 20
+  storage_type                = "gp3"
+  storage_encrypted           = true
+  db_name                     = replace(var.project_name, "-", "")
+  username                    = "dbadmin"
+  manage_master_user_password = true
+  db_subnet_group_name        = aws_db_subnet_group.main.name
+  vpc_security_group_ids      = [data.terraform_remote_state.security_groups.outputs.rds_sg_id]
+  skip_final_snapshot         = true
+  backup_retention_period     = 7
+  multi_az                    = true
+  tags = {
+    Name        = "${var.project_name}-rds"
+    Environment = var.environment
+  }
+}

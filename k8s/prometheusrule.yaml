@@ -1,0 +1,21 @@
+---
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: app-primeira-alerts
+  namespace: app-primeira
+  labels:
+    release: prometheus
+spec:
+  groups:
+    - name: app-primeira
+      interval: 30s
+      rules:
+        - alert: HighErrorRate
+          expr: rate(flask_http_request_total{status="500"}[5m]) > 0.05
+          for: 1m
+          labels:
+            severity: critical
+          annotations:
+            summary: "Alta taxa de erros na aplicação"
+            description: "A aplicação está retornando muitos erros 500"

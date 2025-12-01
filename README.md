@@ -8,7 +8,8 @@ Desafio 1 - Rodar essa aplicação na sua maquina -
 ### Obstaculos
  - Aplicação em Python
    - ![alt text](Imagens/image.png)
- -
+ -Encontramos Falhas nos Pacotes do Requirement
+   -  
 
 
 Desafio 2 - Dockernizar essa aplicação e provisionar

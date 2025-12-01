@@ -1,0 +1,32 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: app-primeira
+  namespace: app-primeira
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: app-primeira
+  template:
+    metadata:
+      labels:
+        app: app-primeira
+    spec:
+      containers:
+        - name: app
+          image: app-primeira:v1
+          imagePullPolicy: Never
+          env:
+            - name: REDIS_HOST
+              value: redis
+            - name: POSTGRES_HOST
+              value: postgres
+            - name: POSTGRES_PASSWORD
+              value: senhafacil
+          ports:
+            - containerPort: 5000
+              name: http
+            - containerPort: 9999
+              name: metrics

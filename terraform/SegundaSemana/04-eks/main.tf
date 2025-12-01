@@ -1,0 +1,70 @@
+terraform {
+  required_version = ">= 1.5"
+  required_providers {
+    aws = {
+      source  = "hashicorp/aws"
+      version = "~> 5.0"
+    }
+  }
+}
+
+provider "aws" {
+  region = var.region
+}
+
+data "terraform_remote_state" "vpc" {
+  backend = "s3"
+  config = {
+    bucket = var.state_bucket
+    key    = "vpc/terraform.tfstate"
+    region = var.region
+  }
+}
+
+data "terraform_remote_state" "security_groups" {
+  backend = "s3"
+  config = {
+    bucket = var.state_bucket
+    key    = "security-groups/terraform.tfstate"
+    region = var.region
+  }
+}
+
+data "terraform_remote_state" "iam" {
+  backend = "s3"
+  config = {
+    bucket = var.state_bucket
+    key    = "iam/terraform.tfstate"
+    region = var.region
+  }
+}
+
+resource "aws_eks_cluster" "main" {
+  name     = "${var.project_name}-eks"
+  role_arn = data.terraform_remote_state.iam.outputs.eks_cluster_role_arn
+  version  = var.eks_version
+
+  vpc_config {
+    subnet_ids              = concat(data.terraform_remote_state.vpc.outputs.private_subnet_ids, data.terraform_remote_state.vpc.outputs.public_subnet_ids)
+    security_group_ids      = [data.terraform_remote_state.security_groups.outputs.eks_cluster_sg_id]
+    endpoint_private_access = true
+    endpoint_public_access  = true
+  }
+
+  enabled_cluster_log_types = ["api", "audit", "authenticator", "controllerManager", "scheduler"]
+
+  tags = {
+    Name        = "${var.project_name}-eks"
+    Environment = var.environment
+  }
+}
+
+resource "aws_eks_addon" "vpc_cni" {
+  cluster_name = aws_eks_cluster.main.name
+  addon_name   = "vpc-cni"
+}
+
+resource "aws_eks_addon" "kube_proxy" {
+  cluster_name = aws_eks_cluster.main.name
+  addon_name   = "kube-proxy"
+}

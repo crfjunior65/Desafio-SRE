@@ -1,0 +1,23 @@
+output "eks_cluster_sg_id" {
+  value = aws_security_group.eks_cluster.id
+}
+
+output "eks_nodes_sg_id" {
+  value = aws_security_group.eks_nodes.id
+}
+
+output "rds_sg_id" {
+  value = aws_security_group.rds.id
+}
+
+output "redis_sg_id" {
+  value = aws_security_group.redis.id
+}
+
+output "kafka_sg_id" {
+  value = aws_security_group.kafka.id
+}
+
+output "opensearch_sg_id" {
+  value = aws_security_group.opensearch.id
+}

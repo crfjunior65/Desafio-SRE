@@ -1,0 +1,74 @@
+terraform {
+  required_version = ">= 1.5"
+  required_providers {
+    aws = {
+      source  = "hashicorp/aws"
+      version = "~> 5.0"
+    }
+  }
+}
+
+provider "aws" {
+  region = var.region
+}
+
+data "terraform_remote_state" "vpc" {
+  backend = "s3"
+  config = {
+    bucket = var.state_bucket
+    key    = "vpc/terraform.tfstate"
+    region = var.region
+  }
+}
+
+data "terraform_remote_state" "eks" {
+  backend = "s3"
+  config = {
+    bucket = var.state_bucket
+    key    = "eks/terraform.tfstate"
+    region = var.region
+  }
+}
+
+data "terraform_remote_state" "iam" {
+  backend = "s3"
+  config = {
+    bucket = var.state_bucket
+    key    = "iam/terraform.tfstate"
+    region = var.region
+  }
+}
+
+resource "aws_eks_node_group" "main" {
+  for_each = var.node_groups
+
+  cluster_name    = data.terraform_remote_state.eks.outputs.cluster_name
+  node_group_name = "${var.project_name}-${each.key}"
+  node_role_arn   = data.terraform_remote_state.iam.outputs.eks_nodes_role_arn
+  subnet_ids      = data.terraform_remote_state.vpc.outputs.private_subnet_ids
+
+  capacity_type  = each.value.capacity_type
+  instance_types = each.value.instance_types
+
+  scaling_config {
+    desired_size = each.value.desired_size
+    max_size     = each.value.max_size
+    min_size     = each.value.min_size
+  }
+
+  update_config {
+    max_unavailable = 1
+  }
+
+  tags = {
+    Name        = "${var.project_name}-${each.key}"
+    Environment = var.environment
+    Type        = each.value.capacity_type
+  }
+}
+
+resource "aws_eks_addon" "coredns" {
+  cluster_name = data.terraform_remote_state.eks.outputs.cluster_name
+  addon_name   = "coredns"
+  depends_on   = [aws_eks_node_group.main]
+}
