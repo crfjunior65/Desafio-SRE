@@ -16,7 +16,7 @@ Projeto desenvolvido como parte do Nivelamento Tecnico e processo de Inclusão n
 - ✅ Implementar monitoramento (Prometheus + Grafana)
 
 ### Segunda Semana
-- ⏳ Provisionar infraestrutura AWS (VPC, EKS, RDS, Kafka, Redis, OpenSearch)
+- ✅ Provisionar infraestrutura AWS (VPC, EKS, RDS, Kafka, Redis, OpenSearch)
 - ⏳ CI/CD com ArgoCD
 - ⏳ APM e coleta de métricas
 - ⏳ Logs centralizados no OpenSearch
@@ -136,6 +136,7 @@ desafio-sre     redis                   1/1         Running
 **Acesso:**
 - Prometheus: `kubectl port-forward -n monitoring svc/prometheus-server-kube-prom-prometheus 9090:9090`
 - Grafana: `kubectl port-forward -n monitoring svc/prometheus-server-grafana 3000:80`
+
 
 ---
 
@@ -380,15 +381,152 @@ kubectl port-forward -n monitoring svc/prometheus-server-grafana 3000:80
 - **Documentação:** 100+ páginas
 
 ---
+- [x] Provisionar infraestrutura AWS
+---
+### ✅ Desafio 6 - Infraestrutura AWS
+**Status:** Concluído
 
+**Implementação:**
+- Infraestrutura completa provisionada na AWS usando Terraform
+- Arquitetura modular com remote state isolado por componente
+- Multi-AZ para alta disponibilidade
+- Região: us-east-2 (Ohio)
+
+**Recursos Provisionados:**
+
+**Networking:**
+- VPC 10.100.0.0/16 com 2 Availability Zones (us-east-2a, us-east-2b)
+- 2 Subnets públicas + 2 Subnets privadas
+- 2 NAT Gateways para alta disponibilidade
+- Internet Gateway
+- Route Tables configuradas
+
+**Compute:**
+- EKS Cluster v1.34 com control plane gerenciado
+- 3 Node Groups:
+  - spot_1: 2 nodes t3.medium/t3a.medium (SPOT)
+  - spot_2: 2 nodes t3.large/t3a.large (SPOT)
+  - on_demand: 1 node t3.medium (ON_DEMAND)
+- Auto-scaling configurado (5-11 nodes)
+- IAM Roles com políticas de menor privilégio
+
+**Databases:**
+- RDS PostgreSQL 17.6 (db.t3.micro)
+- Multi-AZ para failover automático
+- Backup automatizado
+- Criptografia at-rest habilitada
+
+**Cache:**
+- ElastiCache Redis 7.0 (cache.t3.micro)
+- Replicação Multi-AZ
+- Automatic failover habilitado
+
+**Messaging:**
+- MSK (Managed Kafka) 3.5.1
+- 2 brokers kafka.t3.small
+- Multi-AZ deployment
+- Criptografia in-transit e at-rest
+
+**Search & Analytics:**
+- OpenSearch 2.11 (t3.small.search)
+- 2 nodes para alta disponibilidade
+- Fine-grained access control
+- Encryption at-rest e node-to-node
+
+**Container Registry:**
+- ECR (Elastic Container Registry)
+- Image scanning habilitado
+- Lifecycle policy (manter últimas 10 imagens)
+
+**Segurança:**
+- Security Groups isolados por serviço
+- Criptografia habilitada em todos os recursos
+- IAM Roles com políticas específicas
+- Secrets gerenciados pela AWS
+- VPC endpoints para serviços AWS
+
+**Observabilidade:**
+- EKS Control Plane Logs habilitados
+- CloudWatch Logs integrado
+- Tags padronizadas em todos os recursos
+
+**Infraestrutura como Código:**
+- 10 módulos Terraform independentes
+- Remote state no S3 com versionamento
+- Backend isolado por módulo
+- Variáveis centralizadas
+- Tags padrão aplicadas automaticamente
+
+**Módulos Terraform:**
+```
+00-s3_remote_state/    # Bucket S3 para remote state
+01-vpc/                # VPC + Subnets + NAT Gateways
+02-security_group/     # Security Groups isolados
+03-iam/                # IAM Roles para EKS
+04-eks/                # EKS Cluster v1.34
+05-node_groups/        # 3 Node Groups (2 SPOT + 1 ON_DEMAND)
+06-rds/                # PostgreSQL Multi-AZ
+07-kafka/              # MSK (Kafka) 2 brokers
+08-redis/              # ElastiCache Redis replicado
+09-opensearch/         # OpenSearch 2 nodes
+10-ecr/                # Container Registry
+```
+
+**Desafios Técnicos Superados:**
+1. **Capacidade SPOT:** Instâncias t3a.medium indisponíveis em us-east-1a → Migração para us-east-2 (us-east-2a, us-east-2b)
+2. **Naming OpenSearch:** Domain name com underscores inválido → Implementação de função replace() para sanitização
+3. **Tags Padronizadas:** Repetição manual de tags → Implementação de default_tags no provider AWS
+4. **Modularização:** Dependências entre módulos → Remote state data sources para comunicação
+
+**Boas Práticas Implementadas:**
+- ✅ Infraestrutura modular e reutilizável
+- ✅ Remote state isolado por componente
+- ✅ Multi-AZ em todos os serviços críticos
+- ✅ Criptografia por padrão
+- ✅ Security Groups com menor privilégio
+- ✅ Auto-scaling configurado
+- ✅ Backup automatizado
+- ✅ Tags consistentes para governança
+- ✅ Documentação inline nos módulos
+
+**Custo Estimado Mensal:**
+- VPC (NAT Gateways): ~$65
+- EKS Control Plane: ~$73
+- EC2 Nodes (5-11 instances): ~$80-120
+- RDS PostgreSQL: ~$30
+- MSK (Kafka): ~$150
+- ElastiCache Redis: ~$25
+- OpenSearch: ~$80
+- **Total:** ~$500-550/mês
+
+**Localização:** `terraform/SegundaSemana/`
+
+**Tempo de Provisionamento:** ~45 minutos
+
+**Validação:**
+```bash
+# Configurar kubectl
+aws eks update-kubeconfig --name desafio-sre-junior-eks --region us-east-2
+
+# Verificar nodes
+kubectl get nodes
+
+# Verificar recursos AWS
+aws eks describe-cluster --name desafio-sre-junior-eks --region us-east-2
+aws rds describe-db-instances --region us-east-2
+aws elasticache describe-cache-clusters --region us-east-2
+```
+
+---
 ## 🔄 Próximos Passos
 
 ### Segunda Semana
-- [ ] Provisionar infraestrutura AWS
 - [ ] Deploy com ArgoCD
 - [ ] Implementar APM
 - [ ] Centralizar logs no OpenSearch
 - [ ] Documentação completa
+
+---
 
 ---
 
@@ -399,6 +537,6 @@ SRE / DevOps - ElvenWorks
 
 ---
 
-**Última atualização:** 02/12/2025  
-**Versão:** 1.0  
-**Status:** Primeira Semana Concluída ✅
+**Última atualização:** 03/12/2025  
+**Versão:** 1.1  
+**Status:** Desafio 6 Concluído ✅
