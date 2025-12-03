@@ -1,15 +1,15 @@
 # Global Variables
-project_name = "desafio-sre"
+project_name = "desafio-sre-junior"
 environment  = "production"
 region       = "us-east-1"
-state_bucket = "desafio-sre-tfstate-387146597296"
+state_bucket = "desafio-sre-junior-tfstate-870205216049"
 
 # VPC
 vpc_cidr           = "10.100.0.0/16"
 availability_zones = ["us-east-1a", "us-east-1b"]
 
 # EKS
-eks_version = "1.29"
+eks_version = "1.34"
 node_groups = {
   spot_1 = {
     instance_types = ["t3.medium", "t3a.medium"]

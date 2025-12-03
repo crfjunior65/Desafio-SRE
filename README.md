@@ -225,17 +225,13 @@ Desafio-SRE/
 │   │   ├── Deployments/                   # Manifests da aplicação
 │   │   └── Monitoring/                    # Manifests de monitoramento
 │   ├── limpar-cluster.sh                  # Script de limpeza
-│   ├── recriar-cluster.sh                 # Script de recriação
-│   ├── aplicar-correcoes.sh               # Script de correções
-│   ├── TUTORIAL-COMPLETO.md               # Tutorial detalhado
-│   ├── COMANDOS-UTEIS.md                  # Cheat sheet
-│   └── CORRECOES-APLICADAS.md             # Documentação de correções
+│   └── recriar-cluster.sh                 # Script de recriação
+│
 │
 ├── terraform/
 │   ├── PrimeiraSemana-Desafio-03/         # Terraform + Docker
 │   └── SegundaSemana/                     # Infraestrutura AWS
 │
-├── X.Docs/                                # Documentação
 ├── docker-compose.yaml                    # Ambiente local
 └── README.md                              # Este arquivo
 ```

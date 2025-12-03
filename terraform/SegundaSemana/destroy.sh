@@ -19,11 +19,11 @@ cd ../05-node_groups && terraform destroy -var-file=../terraform.tfvars -var="st
 echo "Serviço a ser Destruido: EKS"
 cd ../04-eks && terraform destroy -var-file=../terraform.tfvars -var="state_bucket=${STATE_BUCKET}" -auto-approve
 echo "Serviço a ser Destruido: IAM"
-#cd ../03-iam && terraform destroy -var-file=../terraform.tfvars -auto-approve
+cd ../03-iam && terraform destroy -var-file=../terraform.tfvars -auto-approve
 echo "Serviço a ser Destruido: Security Group"
-#cd ../02-security_group && terraform destroy -var-file=../terraform.tfvars -var="state_bucket=${STATE_BUCKET}" -auto-approve
+cd ../02-security_group && terraform destroy -var-file=../terraform.tfvars -var="state_bucket=${STATE_BUCKET}" -auto-approve
 echo "Serviço a ser Destruido: VPC"
-#cd ../01-vpc && terraform destroy -var-file=../terraform.tfvars -auto-approve
+cd ../01-vpc && terraform destroy -var-file=../terraform.tfvars -auto-approve
 echo "Serviço a ser Destruido: S3 Remote State"
 #cd ../00-s3_remote_state && terraform destroy -var-file=../terraform.tfvars -auto-approve
 cd ..

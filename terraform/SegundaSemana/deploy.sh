@@ -2,7 +2,7 @@
 set -e
 
 ACCOUNT_ID=$(aws sts get-caller-identity --query Account --output text)
-STATE_BUCKET="desafio-sre-tfstate-${ACCOUNT_ID}"
+STATE_BUCKET="desafio-sre-junior-tfstate-${ACCOUNT_ID}"
 
 echo "=== Deploying Infrastructure ==="
 echo "Account ID: ${ACCOUNT_ID}"
@@ -30,8 +30,8 @@ for module in "${MODULES[@]}"; do
   cd "${module}"
 
   terraform init
-  terraform plan -var-file=../terraform.tfvars                         ###-var="state_bucket=${STATE_BUCKET}"
-  terraform apply -var-file=../terraform.tfvars -auto-approve          ### -var="state_bucket=${STATE_BUCKET}" -auto-approve
+  terraform plan -var-file=../terraform.tfvars -compact-warnings                      ###-var="state_bucket=${STATE_BUCKET}"
+  terraform apply -var-file=../terraform.tfvars -compact-warnings -auto-approve          ### -var="state_bucket=${STATE_BUCKET}" -auto-approve
 
   cd ..
 done
