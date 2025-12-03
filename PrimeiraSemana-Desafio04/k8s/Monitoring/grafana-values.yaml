@@ -1,0 +1,105 @@
+---
+# grafana-values.yaml
+## Configurações detalhadas do Grafana
+
+# Configuração do Grafana
+grafana.ini:
+  # Configurações do servidor
+  server:
+    domain: localhost
+    root_url: "%(protocol)s://%(domain)s:%(http_port)s/"
+    serve_from_sub_path: false
+
+  # Configurações de segurança
+  security:
+    admin_user: admin
+    admin_password: admin  # MUDAR EM PRODUÇÃO!
+    secret_key: "aVeryLongSecretKeyForGrafana"
+
+  # Configurações de banco de dados
+  database:
+    type: sqlite3
+
+  # Configurações de auth (desabilitar login anônimo)
+  auth:
+    disable_login_form: false
+    disable_signout_menu: false
+
+  # Configurações de usuários
+  users:
+    allow_sign_up: false
+    auto_assign_org: true
+    auto_assign_org_role: Viewer
+
+  # Configurações de alertas
+  alerting:
+    enabled: true
+
+  # Configurações de logs
+  log:
+    mode: console
+    level: info
+
+# Persistência de dados
+persistence:
+  enabled: true
+  size: 5Gi
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: standard
+
+# Recursos (CPU/Memória)
+resources:
+  requests:
+    memory: 256Mi
+    cpu: 100m
+  limits:
+    memory: 512Mi
+    cpu: 500m
+
+# Service para expor Grafana
+service:
+  type: NodePort
+  port: 3000
+  nodePort: 30091
+  annotations: {}
+
+# Ingress (se quiser acesso via domínio)
+ingress:
+  enabled: false
+
+# Plugins que queremos instalar
+plugins:
+  - grafana-piechart-panel
+
+# Datasources (fontes de dados)
+sidecar:
+  datasources:
+    enabled: true
+    label: grafana_datasource
+  dashboards:
+    enabled: true
+    label: grafana_dashboard
+
+# Configurações de admin
+admin:
+  existingSecret: ""
+  userKey: admin-user
+  passwordKey: admin-password
+
+# Configurações de segurança
+securityContext:
+  runAsUser: 472
+  runAsGroup: 472
+  fsGroup: 472
+
+# Config extra
+env:
+  GF_INSTALL_PLUGINS: "grafana-piechart-panel"
+  GF_SECURITY_ADMIN_PASSWORD: "admin"  # MUDAR EM PRODUÇÃO!
+
+# ServiceAccount
+serviceAccount:
+  create: true
+  name: grafana
+  annotations: {}

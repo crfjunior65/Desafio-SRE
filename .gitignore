@@ -102,6 +102,7 @@ plan.out
 s3/plan.out
 .amazon*
 *.swp
+*.sh
 goinsiders/infra/examples/
 goinsiders/infra/examples/*
 goinsiders/infra/examples/example.tf
