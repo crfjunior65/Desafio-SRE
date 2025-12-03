@@ -25,3 +25,9 @@ variable "rds_engine" {
 variable "rds_engine_version" {
   type = string
 }
+
+variable "region_state" {
+  description = "Região onde estão armazenados os state files do Terraform"
+  type        = string
+  #default     = "us-east-1"
+}

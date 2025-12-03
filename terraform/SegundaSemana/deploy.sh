@@ -8,6 +8,12 @@ echo "=== Deploying Infrastructure ==="
 echo "Account ID: ${ACCOUNT_ID}"
 echo "State Bucket: ${STATE_BUCKET}"
 
+echo "=== Deploying Infrastructure ===" > deployed_resources.txt
+echo "Account ID: ${ACCOUNT_ID}" >> deployed_resources.txt
+echo "State Bucket: ${STATE_BUCKET}" >> deployed_resources.txt
+echo `date` >> deployed_resources.txt
+echo "#==================================#" >> deployed_resources.txt
+
 # Update backend configurations
 find . -name "backend.tf" -type f -exec sed -i "s/ACCOUNT_ID/${ACCOUNT_ID}/g" {} \;
 
@@ -22,6 +28,7 @@ MODULES=(
   "07-kafka"
   "08-redis"
   "09-opensearch"
+  "10-ecr"
 )
 
 for module in "${MODULES[@]}"; do
@@ -29,11 +36,17 @@ for module in "${MODULES[@]}"; do
   echo "=== Deploying ${module} ==="
   cd "${module}"
 
+  terraform fmt -recursive
   terraform init
   terraform plan -var-file=../terraform.tfvars -compact-warnings                      ###-var="state_bucket=${STATE_BUCKET}"
   terraform apply -var-file=../terraform.tfvars -compact-warnings -auto-approve          ### -var="state_bucket=${STATE_BUCKET}" -auto-approve
-
+  terraform state list
+  echo "Deployed resources from ${module}:" >> ../deployed_resources.txt
+  echo "--------------------------------" >> ../deployed_resources.txt
+  terraform state list >> ../deployed_resources.txt
+  echo "#==================================#" >> ../deployed_resources.txt
   cd ..
+
 done
 
 echo ""

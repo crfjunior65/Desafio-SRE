@@ -21,3 +21,9 @@ variable "kafka_instance_type" {
 variable "kafka_version" {
   type = string
 }
+
+variable "region_state" {
+  description = "Região onde estão armazenados os state files do Terraform"
+  type        = string
+  #default     = "us-east-1"
+}

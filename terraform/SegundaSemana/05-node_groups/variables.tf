@@ -23,3 +23,9 @@ variable "node_groups" {
     max_size       = number
   }))
 }
+
+variable "region_state" {
+  description = "Região onde estão armazenados os state files do Terraform"
+  type        = string
+  #default     = "us-east-1"
+}

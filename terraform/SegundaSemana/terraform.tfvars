@@ -1,12 +1,13 @@
 # Global Variables
 project_name = "desafio-sre-junior"
 environment  = "production"
-region       = "us-east-1"
+region       = "us-east-2"
+region_state = "us-east-1"
 state_bucket = "desafio-sre-junior-tfstate-870205216049"
 
 # VPC
 vpc_cidr           = "10.100.0.0/16"
-availability_zones = ["us-east-1a", "us-east-1b"]
+availability_zones = ["us-east-2a", "us-east-2b"]
 
 # EKS
 eks_version = "1.34"
@@ -51,3 +52,7 @@ redis_engine_version = "7.0"
 opensearch_instance_type   = "t3.small.search"
 opensearch_version         = "2.11"
 opensearch_master_password = "SuaSenhaSegura123!"
+
+# ECR
+ecr_repository_name = "desafio-sre-junior-repo"
+ecr_image_tag       = "v1.0.0"
