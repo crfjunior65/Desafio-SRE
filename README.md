@@ -2,7 +2,7 @@
 
 ## 📋 Sobre o Projeto
 
-Projeto desenvolvido como parte do processo seletivo para a posição de SRE na Elvenworks. O desafio consiste em implementar uma stack completa de DevOps/SRE, desde a containerização de uma aplicação até o deploy em Kubernetes com monitoramento completo.
+Projeto desenvolvido como parte do Nivelamento Tecnico e processo de Inclusão na Equipe para a posição de SRE / DevOps na Elvenworks. O desafio consiste em implementar uma stack completa de DevOps/SRE, desde a containerização de uma aplicação até o deploy em Kubernetes com monitoramento completo.
 
 ---
 
@@ -398,8 +398,8 @@ kubectl port-forward -n monitoring svc/prometheus-server-grafana 3000:80
 
 ## 👤 Autor
 
-**Junior**  
-Candidato à vaga de SRE - Elvenworks
+**Junior Fernandes**  
+SRE / DevOps - ElvenWorks
 
 ---
 
