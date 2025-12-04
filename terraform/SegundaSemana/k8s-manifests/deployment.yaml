@@ -52,7 +52,7 @@ spec:
     spec:
       containers:
         - name: flask-app
-          image: crfjunior65/desafio-sre-app:latest   ###  REPLACE_WITH_DOCKERHUB_IMAGE
+          image: crfjunior65/flask-app:latest
           imagePullPolicy: Always
           ports:
             - containerPort: 5000

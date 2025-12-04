@@ -11,7 +11,7 @@ name: Build and Push Docker Image
 
 env:
   DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
-  IMAGE_NAME: desafio-sre-app
+  IMAGE_NAME: flask-app
 
 jobs:
   build-and-push:
