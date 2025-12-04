@@ -1,0 +1,7 @@
+# AWS Endpoints - Desafio 7
+# Gerado em: qui 04 dez 2025 14:27:13 -03
+
+RDS_ENDPOINT=desafio-sre-junior-rds.ccp6xhbb8bo6.us-east-2.rds.amazonaws.com:5432
+REDIS_ENDPOINT=N/A
+KAFKA_ENDPOINT=b-1.desafiosrejuniorkafka.mcjvpw.c7.kafka.us-east-2.amazonaws.com:9094,b-2.desafiosrejuniorkafka.mcjvpw.c7.kafka.us-east-2.amazonaws.com:9094
+OPENSEARCH_ENDPOINT=vpc-desafio-sre-junior-os-zow5qsi25muh5ql5zs6eznjdma.us-east-2.es.amazonaws.com
