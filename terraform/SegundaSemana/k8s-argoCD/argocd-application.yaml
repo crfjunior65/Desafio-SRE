@@ -8,7 +8,7 @@ spec:
   project: default
 
   source:
-    repoURL: https://github.com/SEU-USUARIO/Desafio-SRE.git
+    repoURL: https://github.com/crfjunio65/Desafio-SRE.git
     targetRevision: main
     path: terraform/SegundaSemana/k8s-manifests
 
