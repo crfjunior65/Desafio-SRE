@@ -13,6 +13,10 @@ metrics = PrometheusMetrics(app)
 def hello_world():
     return "App on"
 
+@app.route('/version')
+def version():
+    return jsonify({version": "2.0.0", "deployed_by": "argocd"})
+
 @app.route('/health')
 def health():
     return jsonify({"status": "healthy"}), 200
