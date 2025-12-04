@@ -10,13 +10,13 @@ metadata:
   name: app-config
   namespace: desafio-sre
 data:
-  REDIS_HOST: "replica.desafio-sre-junior-redis.8qzoyh.use2.cache.amazonaws.com"  ###  "REPLACE_WITH_REDIS_ENDPOINT"
+  REDIS_HOST: "REPLACE_WITH_REDIS_ENDPOINT"
   REDIS_PORT: "6379"
   REDIS_SSL: "true"
-  POSTGRES_HOST: "desafio-sre-junior-rds.ccp6xhbb8bo6.us-east-2.rds.amazonaws.com"  ###  "REPLACE_WITH_RDS_ENDPOINT"
+  POSTGRES_HOST: "REPLACE_WITH_RDS_ENDPOINT"
   POSTGRES_PORT: "5432"
-  POSTGRES_DB: "desafiosrejunior"
-  POSTGRES_USER: "dbadmin"
+  POSTGRES_DB: "desafiosre"
+  POSTGRES_USER: "admin"
 ---
 apiVersion: v1
 kind: Secret
@@ -25,7 +25,7 @@ metadata:
   namespace: desafio-sre
 type: Opaque
 stringData:
-  POSTGRES_PASSWORD: "SOevAM3nY#-p8Hs>ej]_>I$TUWEA"  ###  "REPLACE_WITH_RDS_PASSWORD"
+  POSTGRES_PASSWORD: "REPLACE_WITH_RDS_PASSWORD"
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -52,7 +52,7 @@ spec:
     spec:
       containers:
         - name: flask-app
-          image: crfjunior65/desafio-sre-app:latest   ###  REPLACE_WITH_DOCKERHUB_IMAGE
+          image: REPLACE_WITH_DOCKERHUB_IMAGE
           imagePullPolicy: Always
           ports:
             - containerPort: 5000
