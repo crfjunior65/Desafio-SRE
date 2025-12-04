@@ -89,6 +89,15 @@ resource "aws_security_group" "rds" {
     to_port         = 5432
     protocol        = "tcp"
     security_groups = [aws_security_group.eks_nodes.id]
+    description     = "PostgreSQL from EKS nodes"
+  }
+
+  ingress {
+    from_port   = 5432
+    to_port     = 5432
+    protocol    = "tcp"
+    cidr_blocks = [data.terraform_remote_state.vpc.outputs.vpc_cidr]
+    description = "PostgreSQL from VPC"
   }
 
   egress {
@@ -114,6 +123,15 @@ resource "aws_security_group" "redis" {
     to_port         = 6379
     protocol        = "tcp"
     security_groups = [aws_security_group.eks_nodes.id]
+    description     = "Redis from EKS nodes"
+  }
+
+  ingress {
+    from_port   = 6379
+    to_port     = 6379
+    protocol    = "tcp"
+    cidr_blocks = [data.terraform_remote_state.vpc.outputs.vpc_cidr]
+    description = "Redis from VPC"
   }
 
   egress {

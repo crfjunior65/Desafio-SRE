@@ -24,7 +24,14 @@ def health():
 @app.route('/redis')
 def get_status_redis():
     try:
-        r = redis.Redis(host=os.getenv('REDIS_HOST', 'localhost'), port=6379, db=0, socket_connect_timeout=5)
+        redis_ssl = os.getenv('REDIS_SSL', 'false').lower() == 'true'
+        r = redis.Redis(
+            host=os.getenv('REDIS_HOST', 'localhost'),
+            port=int(os.getenv('REDIS_PORT', '6379')),
+            db=0,
+            ssl=redis_ssl,
+            socket_connect_timeout=5
+        )
         r.ping()
         return "Conexão com o Redis estabelecida com sucesso!"
     except Exception as e:
@@ -35,8 +42,8 @@ def get_status_postgres():
     try:
         conn = psycopg2.connect(
             host=os.getenv('POSTGRES_HOST', 'localhost'),
-            database="postgres",
-            user="postgres",
+            database=os.getenv('POSTGRES_DB', 'postgres'),
+            user=os.getenv('POSTGRES_USER', 'postgres'),
             password=os.getenv('POSTGRES_PASSWORD', 'senhafacil'),
             connect_timeout=5
         )
