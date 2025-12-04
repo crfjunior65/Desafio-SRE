@@ -17,6 +17,10 @@ def hello_world():
 def version():
     return jsonify({"version": "2.0.0", "deployed_by": "argocd"})
 
+@app.route('/testes')
+def version():
+    return jsonify({"version": "2.0.0", "deployed_by": "CI/CD"})
+
 @app.route('/health')
 def health():
     return jsonify({"status": "healthy"}), 200
