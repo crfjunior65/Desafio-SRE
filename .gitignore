@@ -47,6 +47,8 @@ Junior.*
 *.pem
 aws-key*
 *key*.*
+DESAFIO-07*.*
+DESAFIO-07*
 
 ### Terraform
 .terraform/
