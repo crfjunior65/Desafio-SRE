@@ -36,7 +36,7 @@ metadata:
     app: flask-app
     version: v2.0
 spec:
-  replicas: 6
+  replicas: 16
   selector:
     matchLabels:
       app: flask-app
