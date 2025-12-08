@@ -1,0 +1,3 @@
+eks_cluster_role_arn = "arn:aws:iam::870205216049:role/desafio-sre-junior-eks-cluster-role"
+eks_nodes_role_arn = "arn:aws:iam::870205216049:role/desafio-sre-junior-eks-nodes-role"
+eks_nodes_role_name = "desafio-sre-junior-eks-nodes-role"

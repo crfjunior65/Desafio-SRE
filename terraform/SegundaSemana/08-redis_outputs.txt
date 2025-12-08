@@ -1,0 +1,2 @@
+redis_port = 6379
+redis_reader_endpoint = "replica.desafio-sre-junior-redis.8qzoyh.use2.cache.amazonaws.com"

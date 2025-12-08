@@ -1,0 +1,3 @@
+opensearch_arn = "arn:aws:es:us-east-2:870205216049:domain/desafio-sre-junior-os"
+opensearch_dashboard_endpoint = "vpc-desafio-sre-junior-os-zow5qsi25muh5ql5zs6eznjdma.us-east-2.es.amazonaws.com/_dashboards"
+opensearch_endpoint = "vpc-desafio-sre-junior-os-zow5qsi25muh5ql5zs6eznjdma.us-east-2.es.amazonaws.com"

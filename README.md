@@ -17,11 +17,11 @@ Projeto desenvolvido como parte do Nivelamento Tecnico e processo de Inclusão n
 
 ### Segunda Semana
 - ✅ Provisionar infraestrutura AWS (VPC, EKS, RDS, Kafka, Redis, OpenSearch)
-- ⏳ CI/CD com ArgoCD
+- ✅ CI/CD com ArgoCD
 - ⏳ APM e coleta de métricas
 - ⏳ Logs centralizados no OpenSearch
-- ⏳ Organização de IaC
-- ⏳ Documentação completa
+- ✅ Organização de IaC
+- ✅ Documentação completa
 
 ---
 
@@ -181,7 +181,108 @@ desafio-sre     redis                   1/1         Running
 
 ---
 
-## 🛠️ Tecnologias Utilizadas
+## 🏗️ Arquitetura AWS - Infraestrutura Produção
+
+```
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                          AWS Cloud - us-east-2 (Ohio)                        │
+│                                                                              │
+│  ┌────────────────────────────────────────────────────────────────────────┐ │
+│  │                    VPC 10.100.0.0/16 (Multi-AZ)                        │ │
+│  │                                                                        │ │
+│  │  ┌──────────────────────────┐  ┌──────────────────────────┐         │ │
+│  │  │   us-east-2a             │  │   us-east-2b             │         │ │
+│  │  │                          │  │                          │         │ │
+│  │  │  ┌────────────────────┐  │  │  ┌────────────────────┐ │         │ │
+│  │  │  │ Public Subnet      │  │  │  │ Public Subnet      │ │         │ │
+│  │  │  │ NAT Gateway        │  │  │  │ NAT Gateway        │ │         │ │
+│  │  │  └────────┬───────────┘  │  │  └────────┬───────────┘ │         │ │
+│  │  │           │              │  │           │             │         │ │
+│  │  │  ┌────────▼───────────┐  │  │  ┌────────▼───────────┐ │         │ │
+│  │  │  │ Private Subnet     │  │  │  │ Private Subnet     │ │         │ │
+│  │  │  │                    │  │  │  │                    │ │         │ │
+│  │  │  │ ┌────────────────┐ │  │  │  │ ┌────────────────┐ │ │         │ │
+│  │  │  │ │ EKS Nodes      │ │  │  │  │ │ EKS Nodes      │ │ │         │ │
+│  │  │  │ │ - SPOT (t3.*)  │ │  │  │  │ │ - SPOT (t3.*)  │ │ │         │ │
+│  │  │  │ │ - ON_DEMAND    │ │  │  │  │ │ - ON_DEMAND    │ │ │         │ │
+│  │  │  │ └────────────────┘ │  │  │  │ └────────────────┘ │ │         │ │
+│  │  │  │                    │  │  │  │                    │ │         │ │
+│  │  │  │ ┌────────────────┐ │  │  │  │ ┌────────────────┐ │ │         │ │
+│  │  │  │ │ RDS PostgreSQL │ │  │  │  │ │ RDS Standby    │ │ │         │ │
+│  │  │  │ │ (Primary)      │◄├──┼──┼──┼►│ (Multi-AZ)     │ │ │         │ │
+│  │  │  │ └────────────────┘ │  │  │  │ └────────────────┘ │ │         │ │
+│  │  │  │                    │  │  │  │                    │ │         │ │
+│  │  │  │ ┌────────────────┐ │  │  │  │ ┌────────────────┐ │ │         │ │
+│  │  │  │ │ ElastiCache    │ │  │  │  │ │ ElastiCache    │ │ │         │ │
+│  │  │  │ │ Redis (Primary)│◄├──┼──┼──┼►│ Redis (Replica)│ │ │         │ │
+│  │  │  │ └────────────────┘ │  │  │  │ └────────────────┘ │ │         │ │
+│  │  │  │                    │  │  │  │                    │ │         │ │
+│  │  │  │ ┌────────────────┐ │  │  │  │ ┌────────────────┐ │ │         │ │
+│  │  │  │ │ MSK Kafka      │ │  │  │  │ │ MSK Kafka      │ │ │         │ │
+│  │  │  │ │ Broker 1       │◄├──┼──┼──┼►│ Broker 2       │ │ │         │ │
+│  │  │  │ └────────────────┘ │  │  │  │ └────────────────┘ │ │         │ │
+│  │  │  │                    │  │  │  │                    │ │         │ │
+│  │  │  │ ┌────────────────┐ │  │  │  │ ┌────────────────┐ │ │         │ │
+│  │  │  │ │ OpenSearch     │ │  │  │  │ │ OpenSearch     │ │ │         │ │
+│  │  │  │ │ Node 1         │◄├──┼──┼──┼►│ Node 2         │ │ │         │ │
+│  │  │  │ └────────────────┘ │  │  │  │ └────────────────┘ │ │         │ │
+│  │  │  └────────────────────┘  │  │  └────────────────────┘ │         │ │
+│  │  └──────────────────────────┘  └──────────────────────────┘         │ │
+│  │                                                                        │ │
+│  │  ┌──────────────────────────────────────────────────────────────────┐ │ │
+│  │  │                    EKS Cluster v1.34                              │ │ │
+│  │  │                                                                   │ │ │
+│  │  │  ┌─────────────────────────────────────────────────────────────┐ │ │ │
+│  │  │  │ Namespace: desafio-sre                                       │ │ │ │
+│  │  │  │                                                              │ │ │ │
+│  │  │  │  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐     │ │ │ │
+│  │  │  │  │ Flask Pod 1  │  │ Flask Pod 2  │  │ Flask Pod 3  │     │ │ │ │
+│  │  │  │  └──────┬───────┘  └──────┬───────┘  └──────┬───────┘     │ │ │ │
+│  │  │  │         │                 │                 │              │ │ │ │
+│  │  │  │         └─────────────────┴─────────────────┘              │ │ │ │
+│  │  │  │                           │                                 │ │ │ │
+│  │  │  │                  ┌────────▼────────┐                       │ │ │ │
+│  │  │  │                  │ LoadBalancer    │                       │ │ │ │
+│  │  │  │                  │ Service         │                       │ │ │ │
+│  │  │  │                  └────────┬────────┘                       │ │ │ │
+│  │  │  └───────────────────────────┼──────────────────────────────┘ │ │ │
+│  │  │                              │                                 │ │ │
+│  │  │  ┌─────────────────────────────────────────────────────────┐  │ │ │
+│  │  │  │ Namespace: argocd                                        │  │ │ │
+│  │  │  │                                                          │  │ │ │
+│  │  │  │  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐  │  │ │ │
+│  │  │  │  │ ArgoCD       │  │ Repo Server  │  │ Application  │  │  │ │ │
+│  │  │  │  │ Server       │  │              │  │ Controller   │  │  │ │ │
+│  │  │  │  └──────────────┘  └──────────────┘  └──────────────┘  │  │ │ │
+│  │  │  └─────────────────────────────────────────────────────────┘  │ │ │
+│  │  └───────────────────────────────────────────────────────────────┘ │ │
+│  └────────────────────────────────────────────────────────────────────┘ │
+│                                                                           │
+│  ┌────────────────────────────────────────────────────────────────────┐  │
+│  │                        Serviços Gerenciados                         │  │
+│  │                                                                     │  │
+│  │  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐            │  │
+│  │  │ ECR          │  │ CloudWatch   │  │ IAM Roles    │            │  │
+│  │  │ (Registry)   │  │ (Logs/Metrics)│  │ (Security)   │            │  │
+│  │  └──────────────┘  └──────────────┘  └──────────────┘            │  │
+│  └────────────────────────────────────────────────────────────────────┘  │
+│                                                                           │
+│  ┌────────────────────────────────────────────────────────────────────┐  │
+│  │                          CI/CD Pipeline                             │  │
+│  │                                                                     │  │
+│  │  GitHub → GitHub Actions → Docker Hub → ArgoCD → EKS              │  │
+│  └────────────────────────────────────────────────────────────────────┘  │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+Legenda:
+  ◄─► Replicação/Failover Multi-AZ
+  │   Comunicação entre componentes
+  ┌─┐ Componente/Serviço
+```
+
+---
+
+## 🔄 Próximos Passos
 
 ### Aplicação
 - **Python 3.12**
@@ -518,7 +619,143 @@ aws elasticache describe-cache-clusters --region us-east-2
 ```
 
 ---
-## 🔄 Próximos Passos
+### ✅ Desafio 7 - CI/CD com ArgoCD
+**Status:** Concluído
+
+**Implementação:**
+- Pipeline CI/CD completo com GitHub Actions e ArgoCD
+- GitOps deployment automatizado
+- Build e push automático de imagens Docker
+- Sincronização automática de manifests Kubernetes
+- Aplicação rodando em EKS com 3 réplicas
+
+**Componentes:**
+
+**GitHub Actions:**
+- Workflow: `.github/workflows/build-deploy.yml`
+- Trigger: Push em `main` com mudanças em `app/**`
+- Build de imagem Docker otimizada
+- Push para Docker Hub: `crfjunior65/flask-app:latest`
+- Tempo de execução: ~2-3 minutos
+
+**ArgoCD:**
+- Instalado no namespace `argocd`
+- Application: `desafio-sre-app`
+- Source: Repositório Git (branch `main`)
+- Path: `terraform/SegundaSemana/k8s-manifests/`
+- Sync Policy: Automático
+- Self-Heal: Habilitado
+- Prune: Habilitado
+
+**Manifests Kubernetes:**
+- **Deployment:** 3 réplicas Flask com health checks
+- **Service:** LoadBalancer para acesso externo
+- **ConfigMap:** Endpoints RDS, Redis, Kafka, OpenSearch
+- **Secret:** Senha do PostgreSQL
+
+**Fluxo CI/CD:**
+```
+1. Developer push código → GitHub
+2. GitHub Actions detecta mudança em app/**
+3. Build da imagem Docker
+4. Push para Docker Hub (crfjunior65/flask-app:latest)
+5. ArgoCD detecta mudança no Git
+6. ArgoCD sincroniza manifests com EKS
+7. Kubernetes faz rolling update dos pods
+8. LoadBalancer roteia tráfego para novos pods
+```
+
+**Recursos Deployados:**
+```
+NAMESPACE       RECURSO                 REPLICAS    STATUS
+desafio-sre     flask-app               3/3         Running
+desafio-sre     flask-app-service       1           LoadBalancer
+desafio-sre     flask-config            1           ConfigMap
+desafio-sre     postgres-secret         1           Secret
+```
+
+**Endpoints da Aplicação:**
+- `/` - Status da aplicação
+- `/health` - Health check
+- `/version` - Versão e deployed_by
+- `/redis` - Teste conexão Redis
+- `/postgres` - Teste conexão PostgreSQL
+- `/metrics` - Métricas Prometheus
+
+**Tempo de Deploy Completo:**
+- GitHub Actions: 2-3 minutos
+- ArgoCD Sync: 1-2 minutos
+- Kubernetes Rollout: 1-2 minutos
+- **Total:** 4-7 minutos
+
+**Validação:**
+```bash
+# Verificar ArgoCD Application
+kubectl get application -n argocd desafio-sre-app
+
+# Verificar pods
+kubectl get pods -n desafio-sre
+
+# Obter URL do LoadBalancer
+kubectl get svc -n desafio-sre flask-app-service
+
+# Testar endpoints
+curl http://<LOAD_BALANCER_URL>/health
+curl http://<LOAD_BALANCER_URL>/version
+```
+
+**Localização:**
+- Workflow: `.github/workflows/build-deploy.yml`
+- ArgoCD App: `terraform/SegundaSemana/argocd-application.yaml`
+- Manifests: `terraform/SegundaSemana/k8s-manifests/`
+
+**Desafios Enfrentados:**
+
+1. **Symlinks no Repositório Git**
+   - **Problema:** ArgoCD bloqueou sync devido a symlinks de venv Python
+   - **Erro:** "Illegal filepath in repo"
+   - **Solução:** Remover diretórios com symlinks do Git usando `git rm -r --cached`
+   - **Aprendizado:** Python venv deve estar sempre no `.gitignore`
+
+2. **Nome Incorreto da Imagem Docker**
+   - **Problema:** Workflow usava `desafio-sre-app` mas deveria ser `flask-app`
+   - **Impacto:** Imagens sendo enviadas para repositório errado no Docker Hub
+   - **Solução:** Corrigir `IMAGE_NAME` no workflow e deployment manifest
+   - **Aprendizado:** Padronizar nomes desde o início do projeto
+
+3. **Função Duplicada no Código**
+   - **Problema:** Duas funções com nome `version()` causando `AssertionError`
+   - **Erro:** "View function mapping is overwriting an existing endpoint"
+   - **Solução:** Renomear segunda função para `testes()`
+   - **Aprendizado:** Validar código localmente antes de push
+
+4. **Cache do ArgoCD Repo Server**
+   - **Problema:** ArgoCD mantinha cache do repositório com symlinks
+   - **Solução:** Restart do pod `argocd-repo-server` para limpar cache
+   - **Comando:** `kubectl delete pod -n argocd -l app.kubernetes.io/name=argocd-repo-server`
+
+5. **Configuração de Secrets**
+   - **Problema:** Secret do PostgreSQL não criado automaticamente
+   - **Solução:** Criar manualmente via kubectl ou incluir no ArgoCD
+   - **Aprendizado:** Secrets sensíveis devem ser gerenciados separadamente
+
+**Boas Práticas Implementadas:**
+- ✅ GitOps: Manifests versionados no Git
+- ✅ Imagens imutáveis: Tag com SHA do commit
+- ✅ Health checks: Liveness e readiness probes
+- ✅ Rolling updates: Zero downtime deployments
+- ✅ Self-healing: ArgoCD reverte mudanças manuais
+- ✅ Observabilidade: Métricas Prometheus expostas
+- ✅ Secrets management: Separado do código
+
+**Melhorias Futuras:**
+- [ ] Implementar tags semânticas (v1.0.0) ao invés de `latest`
+- [ ] Adicionar testes automatizados no pipeline
+- [ ] Implementar ambientes (dev, staging, prod)
+- [ ] Configurar notificações do ArgoCD (Slack/Email)
+- [ ] Adicionar análise de segurança de imagens (Trivy)
+
+---
 
 ### Segunda Semana
 - [ ] Deploy com ArgoCD
@@ -537,6 +774,6 @@ SRE / DevOps - ElvenWorks
 
 ---
 
-**Última atualização:** 03/12/2025  
-**Versão:** 1.1  
-**Status:** Desafio 6 Concluído ✅
+**Última atualização:** 04/12/2024  
+**Versão:** 1.2  
+**Status:** Desafio 7 Concluído ✅

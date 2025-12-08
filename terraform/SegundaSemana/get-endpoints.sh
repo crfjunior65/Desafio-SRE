@@ -16,7 +16,7 @@ echo "  Address: $RDS_ADDRESS"
 echo ""
 echo "Redis (ElastiCache):"
 cd ../08-redis
-REDIS_ENDPOINT=$(terraform output -raw redis_endpoint 2>/dev/null || echo "N/A")
+REDIS_ENDPOINT=$(terraform output -raw redis_reader_endpoint 2>/dev/null || echo "N/A")
 echo "  Endpoint: $REDIS_ENDPOINT"
 
 # Kafka
@@ -72,14 +72,15 @@ echo ""
 echo "=== Próximos Passos ==="
 echo "1. Configure seu Docker Hub username:"
 echo "   export DOCKERHUB_USER=seu_usuario"
+export DOCKERHUB_USER=crfjunior65
 echo ""
 echo "2. Atualize os manifestos Kubernetes:"
 echo "   ./update-manifests.sh"
 echo ""
 echo "3. Build e push da imagem:"
 echo "   cd ../../app"
-echo "   docker build -t \$DOCKERHUB_USER/desafio-sre-app:v2.0 ."
-echo "   docker push \$DOCKERHUB_USER/desafio-sre-app:v2.0"
+echo "   docker build -t \$DOCKERHUB_USER/flask-app:latest ."
+echo "   docker push \$DOCKERHUB_USER/flask-app:latest"
 echo ""
 echo "4. Deploy no EKS:"
 echo "   kubectl apply -f k8s-manifests/deployment.yaml"

@@ -1,0 +1,4 @@
+cluster_certificate_authority_data = <sensitive>
+cluster_endpoint = "https://8545FC670E51ABE51D12C3C2F492C9F2.gr7.us-east-2.eks.amazonaws.com"
+cluster_id = "desafio-sre-junior-eks"
+cluster_name = "desafio-sre-junior-eks"

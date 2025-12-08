@@ -1,0 +1,36 @@
+=== Obtendo Endpoints dos Serviços AWS ===
+
+RDS (PostgreSQL):
+  Endpoint: desafio-sre-junior-rds.ccp6xhbb8bo6.us-east-2.rds.amazonaws.com:5432
+  Address: desafio-sre-junior-rds.ccp6xhbb8bo6.us-east-2.rds.amazonaws.com
+
+Redis (ElastiCache):
+  Endpoint: replica.desafio-sre-junior-redis.8qzoyh.use2.cache.amazonaws.com:6379
+  Address: replica.desafio-sre-junior-redis.8qzoyh.use2.cache.amazonaws.com
+
+Kafka (MSK):
+  Bootstrap Servers: b-1.desafiosrejuniorkafka.8flx6o.c7.kafka.us-east-2.amazonaws.com:9094,b-2.desafiosrejuniorkafka.8flx6o.c7.kafka.us-east-2.amazonaws.com:9094
+
+OpenSearch:
+  Endpoint: vpc-desafio-sre-junior-os-zow5qsi25muh5ql5zs6eznjdma.us-east-2.es.amazonaws.com
+  Dashboard: https://vpc-desafio-sre-junior-os-zow5qsi25muh5ql5zs6eznjdma.us-east-2.es.amazonaws.com/_dashboards
+
+Obtendo senha do RDS...
+  RDS Password: (não disponível - use a senha do terraform.tfvars se configurou manualmente)
+
+✅ Endpoints salvos em: endpoints.env
+
+=== Próximos Passos ===
+1. Configure seu Docker Hub username:
+   export DOCKERHUB_USER=seu_usuario
+
+2. Atualize os manifestos Kubernetes:
+   ./update-manifests.sh
+
+3. Build e push da imagem:
+   cd ../../app
+   docker build -t $DOCKERHUB_USER/flask-app:latest .
+   docker push $DOCKERHUB_USER/flask-app:latest
+
+4. Deploy no EKS:
+   kubectl apply -f k8s-manifests/deployment.yaml

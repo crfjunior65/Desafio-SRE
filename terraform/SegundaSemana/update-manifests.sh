@@ -1,6 +1,6 @@
 #!/bin/bash
 set -e
-
+export DOCKERHUB_USER=crfjunior65
 # Carregar endpoints
 if [ ! -f endpoints.env ]; then
   echo "❌ Arquivo endpoints.env não encontrado!"
@@ -20,7 +20,7 @@ fi
 echo "=== Atualizando Manifestos Kubernetes ==="
 echo "RDS: $RDS_ENDPOINT"
 echo "Redis: $REDIS_ENDPOINT"
-echo "Docker Image: $DOCKERHUB_USER/desafio-sre-app:latest"
+echo "Docker Image: $DOCKERHUB_USER/flask-app:latest"
 
 # Copiar template
 cp k8s-manifests/deployment.yaml k8s-manifests/deployment-configured.yaml
@@ -29,14 +29,14 @@ cp k8s-manifests/deployment.yaml k8s-manifests/deployment-configured.yaml
 sed -i "s|REPLACE_WITH_REDIS_ENDPOINT|$REDIS_ENDPOINT|g" k8s-manifests/deployment-configured.yaml
 sed -i "s|REPLACE_WITH_RDS_ENDPOINT|$RDS_ENDPOINT|g" k8s-manifests/deployment-configured.yaml
 sed -i "s|REPLACE_WITH_RDS_PASSWORD|$RDS_PASSWORD|g" k8s-manifests/deployment-configured.yaml
-sed -i "s|REPLACE_WITH_DOCKERHUB_IMAGE|$DOCKERHUB_USER/desafio-sre-app:latest|g" k8s-manifests/deployment-configured.yaml
+sed -i "s|REPLACE_WITH_DOCKERHUB_IMAGE|$DOCKERHUB_USER/flask-app:latest|g" k8s-manifests/deployment-configured.yaml
 
 echo ""
 echo "✅ Manifesto configurado: k8s-manifests/deployment-configured.yaml"
 echo ""
 echo "=== Próximos Passos ==="
 echo "1. Configurar kubectl:"
-echo "   aws eks update-kubeconfig --name desafio-sre-eks --region us-east-1"
+echo "   aws eks update-kubeconfig --name desafio-sre-junior-eks --region us-east-1"
 echo ""
 echo "2. Deploy:"
 echo "   kubectl apply -f k8s-manifests/deployment-configured.yaml"

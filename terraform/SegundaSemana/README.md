@@ -85,7 +85,7 @@ echo 'opensearch_master_password = "SuaSenhaSegura123!"' >> terraform.tfvars
 
 ## 📦 Recursos Provisionados
 
-- **VPC**: 10.0.0.0/16 com 2 AZs
+- **VPC**: 10.100.0.0/16 com 2 AZs
 - **EKS**: Cluster 1.28 com 5-11 nodes
 - **RDS**: PostgreSQL 15.4 Multi-AZ
 - **MSK**: Kafka 3.5.1 com 2 brokers
@@ -99,7 +99,7 @@ Edite `terraform.tfvars` para customizar:
 ```hcl
 project_name = "desafio-sre"
 region       = "us-east-1"
-vpc_cidr     = "10.0.0.0/16"
+vpc_cidr     = "10.100.0.0/16"
 eks_version  = "1.28"
 
 node_groups = {
@@ -153,7 +153,7 @@ cd ../08-redis && terraform destroy -var-file=../terraform.tfvars -var="state_bu
 
 ## 🔄 Próximos Passos
 
-1. [ ] Configurar Argo CD
+1. [x] Configurar Argo CD
 2. [ ] Instalar Prometheus/Grafana
 3. [ ] Configurar Fluent Bit
 4. [ ] Deploy da aplicação

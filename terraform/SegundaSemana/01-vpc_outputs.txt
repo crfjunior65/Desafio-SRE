@@ -1,0 +1,14 @@
+nat_gateway_ids = [
+  "nat-010deb22d4ac7dec2",
+  "nat-0a33f9cabe8f53284",
+]
+private_subnet_ids = [
+  "subnet-02f6a1f0d5116cdc9",
+  "subnet-00c3e580209eead09",
+]
+public_subnet_ids = [
+  "subnet-0823e30ed2d9e130a",
+  "subnet-06b4185fc465fee0f",
+]
+vpc_cidr = "10.100.0.0/16"
+vpc_id = "vpc-0d247a3a5d8285cf8"

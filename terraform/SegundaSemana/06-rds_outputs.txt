@@ -1,0 +1,4 @@
+rds_address = "desafio-sre-junior-rds.ccp6xhbb8bo6.us-east-2.rds.amazonaws.com"
+rds_db_name = "desafiosrejunior"
+rds_endpoint = "desafio-sre-junior-rds.ccp6xhbb8bo6.us-east-2.rds.amazonaws.com:5432"
+rds_port = 5432

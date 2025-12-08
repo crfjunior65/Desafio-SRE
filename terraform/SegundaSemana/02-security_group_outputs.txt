@@ -1,0 +1,6 @@
+eks_cluster_sg_id = "sg-0ac0f144abc501039"
+eks_nodes_sg_id = "sg-0ab6ebbf2f32323f1"
+kafka_sg_id = "sg-0875ab8bb6cebe25b"
+opensearch_sg_id = "sg-0c359badff6f84210"
+rds_sg_id = "sg-0f1ac4c9e6d076dbe"
+redis_sg_id = "sg-02a101336b047361a"

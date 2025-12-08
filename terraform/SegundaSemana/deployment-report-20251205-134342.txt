@@ -4,16 +4,16 @@
 
 Account ID: 870205216049
 State Bucket: desafio-sre-junior-tfstate-870205216049
-Data/Hora Início: 2025-12-05 15:15:45
+Data/Hora Início: 2025-12-05 13:43:42
 ════════════════════════════════════════════════════════════════
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 MÓDULO: 01-vpc
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-Tempo Init:    5s
-Tempo Plan:    10s
-Tempo Apply:   6s
-Tempo Total:   29s (00:29)
+Tempo Init:    24s
+Tempo Plan:    5s
+Tempo Apply:   151s
+Tempo Total:   183s (03:03)
 Recursos:      17
 
 Recursos Criados:
@@ -38,10 +38,10 @@ Recursos Criados:
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 MÓDULO: 02-security_group
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-Tempo Init:    6s
-Tempo Plan:    8s
-Tempo Apply:   6s
-Tempo Total:   27s (00:27)
+Tempo Init:    25s
+Tempo Plan:    7s
+Tempo Apply:   16s
+Tempo Total:   50s (00:50)
 Recursos:      7
 
 Recursos Criados:
@@ -56,10 +56,10 @@ Recursos Criados:
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 MÓDULO: 03-iam
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-Tempo Init:    4s
-Tempo Plan:    8s
-Tempo Apply:   6s
-Tempo Total:   25s (00:25)
+Tempo Init:    21s
+Tempo Plan:    5s
+Tempo Apply:   7s
+Tempo Total:   35s (00:35)
 Recursos:      10
 
 Recursos Criados:
@@ -77,10 +77,10 @@ Recursos Criados:
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 MÓDULO: 04-eks
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-Tempo Init:    5s
-Tempo Plan:    7s
-Tempo Apply:   6s
-Tempo Total:   25s (00:25)
+Tempo Init:    29s
+Tempo Plan:    6s
+Tempo Apply:   596s
+Tempo Total:   633s (10:33)
 Recursos:      6
 
 Recursos Criados:
@@ -94,10 +94,10 @@ Recursos Criados:
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 MÓDULO: 05-node_groups
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-Tempo Init:    4s
-Tempo Plan:    9s
-Tempo Apply:   6s
-Tempo Total:   27s (00:27)
+Tempo Init:    21s
+Tempo Plan:    7s
+Tempo Apply:   131s
+Tempo Total:   161s (02:41)
 Recursos:      7
 
 Recursos Criados:
@@ -112,10 +112,10 @@ Recursos Criados:
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 MÓDULO: 06-rds
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-Tempo Init:    4s
-Tempo Plan:    9s
-Tempo Apply:   5s
-Tempo Total:   26s (00:26)
+Tempo Init:    20s
+Tempo Plan:    7s
+Tempo Apply:   975s
+Tempo Total:   1005s (16:45)
 Recursos:      4
 
 Recursos Criados:
@@ -127,10 +127,10 @@ Recursos Criados:
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 MÓDULO: 07-kafka
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-Tempo Init:    4s
-Tempo Plan:    8s
-Tempo Apply:   5s
-Tempo Total:   25s (00:25)
+Tempo Init:    20s
+Tempo Plan:    11s
+Tempo Apply:   1499s
+Tempo Total:   1533s (25:33)
 Recursos:      4
 
 Recursos Criados:
@@ -142,10 +142,10 @@ Recursos Criados:
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 MÓDULO: 08-redis
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-Tempo Init:    5s
-Tempo Plan:    8s
-Tempo Apply:   6s
-Tempo Total:   26s (00:26)
+Tempo Init:    22s
+Tempo Plan:    6s
+Tempo Apply:   769s
+Tempo Total:   799s (13:19)
 Recursos:      4
 
 Recursos Criados:
@@ -157,10 +157,10 @@ Recursos Criados:
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 MÓDULO: 09-opensearch
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-Tempo Init:    4s
-Tempo Plan:    9s
-Tempo Apply:   5s
-Tempo Total:   25s (00:25)
+Tempo Init:    23s
+Tempo Plan:    7s
+Tempo Apply:   799s
+Tempo Total:   831s (13:51)
 Recursos:      3
 
 Recursos Criados:
@@ -171,44 +171,12 @@ Recursos Criados:
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 MÓDULO: 10-ecr
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-Tempo Init:    4s
-Tempo Plan:    7s
-Tempo Apply:   5s
-Tempo Total:   24s (00:24)
+Tempo Init:    22s
+Tempo Plan:    6s
+Tempo Apply:   12s
+Tempo Total:   43s (00:43)
 Recursos:      2
 
 Recursos Criados:
   - aws_ecr_lifecycle_policy.app
   - aws_ecr_repository.app
-
-════════════════════════════════════════════════════════════════
-RESUMO FINAL
-════════════════════════════════════════════════════════════════
-
-Data/Hora Fim: 2025-12-05 15:20:37
-Tempo Total: 4m 54s
-Total de Módulos: 10
-Total de Recursos: 64
-
-TEMPO POR MÓDULO:
-────────────────────────────────────────────────────────────────
-01-vpc                0m 29s  (  9%)  17 recursos
-02-security_group     0m 27s  (  9%)  7 recursos
-03-iam                0m 25s  (  8%)  10 recursos
-04-eks                0m 25s  (  8%)  6 recursos
-05-node_groups        0m 27s  (  9%)  7 recursos
-06-rds                0m 26s  (  8%)  4 recursos
-07-kafka              0m 25s  (  8%)  4 recursos
-08-redis              0m 26s  (  8%)  4 recursos
-09-opensearch         0m 25s  (  8%)  3 recursos
-10-ecr                0m 24s  (  8%)  2 recursos
-
-════════════════════════════════════════════════════════════════
-ESTIMATIVA DE CUSTOS AWS
-════════════════════════════════════════════════════════════════
-Custo por Hora:  ~$0.74
-Custo por Dia:   ~$17.78
-Custo por Mês:   ~$544.71
-
-Para otimizações de custo, consulte: COST-ANALYSIS.md
-════════════════════════════════════════════════════════════════

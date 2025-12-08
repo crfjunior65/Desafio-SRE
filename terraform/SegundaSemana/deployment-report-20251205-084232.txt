@@ -4,16 +4,16 @@
 
 Account ID: 870205216049
 State Bucket: desafio-sre-junior-tfstate-870205216049
-Data/Hora Início: 2025-12-05 15:15:45
+Data/Hora Início: 2025-12-05 08:42:32
 ════════════════════════════════════════════════════════════════
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 MÓDULO: 01-vpc
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-Tempo Init:    5s
-Tempo Plan:    10s
-Tempo Apply:   6s
-Tempo Total:   29s (00:29)
+Tempo Init:    4s
+Tempo Plan:    8s
+Tempo Apply:   118s
+Tempo Total:   132s (02:12)
 Recursos:      17
 
 Recursos Criados:
@@ -38,10 +38,10 @@ Recursos Criados:
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 MÓDULO: 02-security_group
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-Tempo Init:    6s
+Tempo Init:    4s
 Tempo Plan:    8s
-Tempo Apply:   6s
-Tempo Total:   27s (00:27)
+Tempo Apply:   10s
+Tempo Total:   25s (00:25)
 Recursos:      7
 
 Recursos Criados:
@@ -57,9 +57,9 @@ Recursos Criados:
 MÓDULO: 03-iam
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 Tempo Init:    4s
-Tempo Plan:    8s
-Tempo Apply:   6s
-Tempo Total:   25s (00:25)
+Tempo Plan:    5s
+Tempo Apply:   8s
+Tempo Total:   20s (00:20)
 Recursos:      10
 
 Recursos Criados:
@@ -77,10 +77,10 @@ Recursos Criados:
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 MÓDULO: 04-eks
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-Tempo Init:    5s
-Tempo Plan:    7s
-Tempo Apply:   6s
-Tempo Total:   25s (00:25)
+Tempo Init:    4s
+Tempo Plan:    6s
+Tempo Apply:   626s
+Tempo Total:   638s (10:38)
 Recursos:      6
 
 Recursos Criados:
@@ -95,9 +95,9 @@ Recursos Criados:
 MÓDULO: 05-node_groups
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 Tempo Init:    4s
-Tempo Plan:    9s
-Tempo Apply:   6s
-Tempo Total:   27s (00:27)
+Tempo Plan:    8s
+Tempo Apply:   141s
+Tempo Total:   156s (02:36)
 Recursos:      7
 
 Recursos Criados:
@@ -112,10 +112,10 @@ Recursos Criados:
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 MÓDULO: 06-rds
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-Tempo Init:    4s
-Tempo Plan:    9s
-Tempo Apply:   5s
-Tempo Total:   26s (00:26)
+Tempo Init:    3s
+Tempo Plan:    7s
+Tempo Apply:   866s
+Tempo Total:   879s (14:39)
 Recursos:      4
 
 Recursos Criados:
@@ -127,10 +127,10 @@ Recursos Criados:
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 MÓDULO: 07-kafka
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-Tempo Init:    4s
-Tempo Plan:    8s
-Tempo Apply:   5s
-Tempo Total:   25s (00:25)
+Tempo Init:    5s
+Tempo Plan:    6s
+Tempo Apply:   1258s
+Tempo Total:   1272s (21:12)
 Recursos:      4
 
 Recursos Criados:
@@ -142,10 +142,10 @@ Recursos Criados:
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 MÓDULO: 08-redis
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-Tempo Init:    5s
-Tempo Plan:    8s
-Tempo Apply:   6s
-Tempo Total:   26s (00:26)
+Tempo Init:    4s
+Tempo Plan:    7s
+Tempo Apply:   779s
+Tempo Total:   792s (13:12)
 Recursos:      4
 
 Recursos Criados:
@@ -157,10 +157,10 @@ Recursos Criados:
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 MÓDULO: 09-opensearch
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-Tempo Init:    4s
-Tempo Plan:    9s
+Tempo Init:    3s
+Tempo Plan:    8s
 Tempo Apply:   5s
-Tempo Total:   25s (00:25)
+Tempo Total:   18s (00:18)
 Recursos:      3
 
 Recursos Criados:
@@ -171,10 +171,10 @@ Recursos Criados:
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 MÓDULO: 10-ecr
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-Tempo Init:    4s
-Tempo Plan:    7s
-Tempo Apply:   5s
-Tempo Total:   24s (00:24)
+Tempo Init:    19s
+Tempo Plan:    6s
+Tempo Apply:   6s
+Tempo Total:   35s (00:35)
 Recursos:      2
 
 Recursos Criados:
@@ -185,23 +185,23 @@ Recursos Criados:
 RESUMO FINAL
 ════════════════════════════════════════════════════════════════
 
-Data/Hora Fim: 2025-12-05 15:20:37
-Tempo Total: 4m 54s
+Data/Hora Fim: 2025-12-05 09:49:04
+Tempo Total: 66m 33s
 Total de Módulos: 10
 Total de Recursos: 64
 
 TEMPO POR MÓDULO:
 ────────────────────────────────────────────────────────────────
-01-vpc                0m 29s  (  9%)  17 recursos
-02-security_group     0m 27s  (  9%)  7 recursos
-03-iam                0m 25s  (  8%)  10 recursos
-04-eks                0m 25s  (  8%)  6 recursos
-05-node_groups        0m 27s  (  9%)  7 recursos
-06-rds                0m 26s  (  8%)  4 recursos
-07-kafka              0m 25s  (  8%)  4 recursos
-08-redis              0m 26s  (  8%)  4 recursos
-09-opensearch         0m 25s  (  8%)  3 recursos
-10-ecr                0m 24s  (  8%)  2 recursos
+01-vpc                2m 12s  (  3%)  17 recursos
+02-security_group     0m 25s  (  0%)  7 recursos
+03-iam                0m 20s  (  0%)  10 recursos
+04-eks               10m 38s  ( 15%)  6 recursos
+05-node_groups        2m 36s  (  3%)  7 recursos
+06-rds               14m 39s  ( 22%)  4 recursos
+07-kafka             21m 12s  ( 31%)  4 recursos
+08-redis             13m 12s  ( 19%)  4 recursos
+09-opensearch         0m 18s  (  0%)  3 recursos
+10-ecr                0m 35s  (  0%)  2 recursos
 
 ════════════════════════════════════════════════════════════════
 ESTIMATIVA DE CUSTOS AWS

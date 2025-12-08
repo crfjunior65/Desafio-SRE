@@ -1,0 +1,3 @@
+repository_arn = "arn:aws:ecr:us-east-2:870205216049:repository/desafio-sre-junior-app"
+repository_name = "desafio-sre-junior-app"
+repository_url = "870205216049.dkr.ecr.us-east-2.amazonaws.com/desafio-sre-junior-app"
