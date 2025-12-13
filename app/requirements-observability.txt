@@ -1,0 +1,16 @@
+# Dependências existentes
+Flask==3.0.0
+gunicorn==21.2.0
+psycopg2-binary==2.9.9
+redis==5.0.1
+prometheus-flask-exporter==0.23.0
+
+# OpenTelemetry para APM (Desafio 8)
+opentelemetry-api==1.21.0
+opentelemetry-sdk==1.21.0
+opentelemetry-instrumentation-flask==0.42b0
+opentelemetry-instrumentation-psycopg2==0.42b0
+opentelemetry-instrumentation-redis==0.42b0
+opentelemetry-exporter-jaeger-thrift==1.21.0
+opentelemetry-exporter-otlp==1.21.0
+opentelemetry-instrumentation-requests==0.42b0

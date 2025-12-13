@@ -1,214 +1,99 @@
-╔════════════════════════════════════════════════════════════════╗
-║          RELATÓRIO DE DEPLOYMENT - INFRAESTRUTURA AWS          ║
-╚════════════════════════════════════════════════════════════════╝
-
+=== Deploying Infrastructure ===
 Account ID: 870205216049
 State Bucket: desafio-sre-junior-tfstate-870205216049
-Data/Hora Início: 2025-12-05 15:15:45
-════════════════════════════════════════════════════════════════
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-MÓDULO: 01-vpc
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-Tempo Init:    5s
-Tempo Plan:    10s
-Tempo Apply:   6s
-Tempo Total:   29s (00:29)
-Recursos:      17
-
-Recursos Criados:
-  - aws_eip.nat[0]
-  - aws_eip.nat[1]
-  - aws_internet_gateway.main
-  - aws_nat_gateway.main[0]
-  - aws_nat_gateway.main[1]
-  - aws_route_table.private[0]
-  - aws_route_table.private[1]
-  - aws_route_table.public
-  - aws_route_table_association.private[0]
-  - aws_route_table_association.private[1]
-  - aws_route_table_association.public[0]
-  - aws_route_table_association.public[1]
-  - aws_subnet.private[0]
-  - aws_subnet.private[1]
-  - aws_subnet.public[0]
-  - aws_subnet.public[1]
-  - aws_vpc.main
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-MÓDULO: 02-security_group
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-Tempo Init:    6s
-Tempo Plan:    8s
-Tempo Apply:   6s
-Tempo Total:   27s (00:27)
-Recursos:      7
-
-Recursos Criados:
-  - data.terraform_remote_state.vpc
-  - aws_security_group.eks_cluster
-  - aws_security_group.eks_nodes
-  - aws_security_group.kafka
-  - aws_security_group.opensearch
-  - aws_security_group.rds
-  - aws_security_group.redis
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-MÓDULO: 03-iam
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-Tempo Init:    4s
-Tempo Plan:    8s
-Tempo Apply:   6s
-Tempo Total:   25s (00:25)
-Recursos:      10
-
-Recursos Criados:
-  - data.aws_iam_policy_document.eks_assume_role
-  - data.aws_iam_policy_document.eks_node_assume_role
-  - aws_iam_role.eks_cluster
-  - aws_iam_role.eks_nodes
-  - aws_iam_role_policy_attachment.eks_cluster_policy
-  - aws_iam_role_policy_attachment.eks_cni_policy
-  - aws_iam_role_policy_attachment.eks_container_registry_policy
-  - aws_iam_role_policy_attachment.eks_ssm_policy
-  - aws_iam_role_policy_attachment.eks_vpc_resource_controller
-  - aws_iam_role_policy_attachment.eks_worker_node_policy
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-MÓDULO: 04-eks
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-Tempo Init:    5s
-Tempo Plan:    7s
-Tempo Apply:   6s
-Tempo Total:   25s (00:25)
-Recursos:      6
-
-Recursos Criados:
-  - data.terraform_remote_state.iam
-  - data.terraform_remote_state.security_groups
-  - data.terraform_remote_state.vpc
-  - aws_eks_addon.kube_proxy
-  - aws_eks_addon.vpc_cni
-  - aws_eks_cluster.main
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-MÓDULO: 05-node_groups
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-Tempo Init:    4s
-Tempo Plan:    9s
-Tempo Apply:   6s
-Tempo Total:   27s (00:27)
-Recursos:      7
-
-Recursos Criados:
-  - data.terraform_remote_state.eks
-  - data.terraform_remote_state.iam
-  - data.terraform_remote_state.vpc
-  - aws_eks_addon.coredns
-  - aws_eks_node_group.main["on_demand"]
-  - aws_eks_node_group.main["spot_1"]
-  - aws_eks_node_group.main["spot_2"]
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-MÓDULO: 06-rds
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-Tempo Init:    4s
-Tempo Plan:    9s
-Tempo Apply:   5s
-Tempo Total:   26s (00:26)
-Recursos:      4
-
-Recursos Criados:
-  - data.terraform_remote_state.security_groups
-  - data.terraform_remote_state.vpc
-  - aws_db_instance.main
-  - aws_db_subnet_group.main
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-MÓDULO: 07-kafka
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-Tempo Init:    4s
-Tempo Plan:    8s
-Tempo Apply:   5s
-Tempo Total:   25s (00:25)
-Recursos:      4
-
-Recursos Criados:
-  - data.terraform_remote_state.security_groups
-  - data.terraform_remote_state.vpc
-  - aws_cloudwatch_log_group.kafka
-  - aws_msk_cluster.main
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-MÓDULO: 08-redis
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-Tempo Init:    5s
-Tempo Plan:    8s
-Tempo Apply:   6s
-Tempo Total:   26s (00:26)
-Recursos:      4
-
-Recursos Criados:
-  - data.terraform_remote_state.security_groups
-  - data.terraform_remote_state.vpc
-  - aws_elasticache_replication_group.main
-  - aws_elasticache_subnet_group.main
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-MÓDULO: 09-opensearch
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-Tempo Init:    4s
-Tempo Plan:    9s
-Tempo Apply:   5s
-Tempo Total:   25s (00:25)
-Recursos:      3
-
-Recursos Criados:
-  - data.terraform_remote_state.security_groups
-  - data.terraform_remote_state.vpc
-  - aws_opensearch_domain.main
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-MÓDULO: 10-ecr
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-Tempo Init:    4s
-Tempo Plan:    7s
-Tempo Apply:   5s
-Tempo Total:   24s (00:24)
-Recursos:      2
-
-Recursos Criados:
-  - aws_ecr_lifecycle_policy.app
-  - aws_ecr_repository.app
-
-════════════════════════════════════════════════════════════════
-RESUMO FINAL
-════════════════════════════════════════════════════════════════
-
-Data/Hora Fim: 2025-12-05 15:20:37
-Tempo Total: 4m 54s
-Total de Módulos: 10
-Total de Recursos: 64
-
-TEMPO POR MÓDULO:
-────────────────────────────────────────────────────────────────
-01-vpc                0m 29s  (  9%)  17 recursos
-02-security_group     0m 27s  (  9%)  7 recursos
-03-iam                0m 25s  (  8%)  10 recursos
-04-eks                0m 25s  (  8%)  6 recursos
-05-node_groups        0m 27s  (  9%)  7 recursos
-06-rds                0m 26s  (  8%)  4 recursos
-07-kafka              0m 25s  (  8%)  4 recursos
-08-redis              0m 26s  (  8%)  4 recursos
-09-opensearch         0m 25s  (  8%)  3 recursos
-10-ecr                0m 24s  (  8%)  2 recursos
-
-════════════════════════════════════════════════════════════════
-ESTIMATIVA DE CUSTOS AWS
-════════════════════════════════════════════════════════════════
-Custo por Hora:  ~$0.74
-Custo por Dia:   ~$17.78
-Custo por Mês:   ~$544.71
-
-Para otimizações de custo, consulte: COST-ANALYSIS.md
-════════════════════════════════════════════════════════════════
+sáb 13 dez 2025 16:32:43 -03
+#==================================#
+Deployed resources from 01-vpc:
+--------------------------------
+aws_eip.nat[0]
+aws_eip.nat[1]
+aws_internet_gateway.main
+aws_nat_gateway.main[0]
+aws_nat_gateway.main[1]
+aws_route_table.private[0]
+aws_route_table.private[1]
+aws_route_table.public
+aws_route_table_association.private[0]
+aws_route_table_association.private[1]
+aws_route_table_association.public[0]
+aws_route_table_association.public[1]
+aws_subnet.private[0]
+aws_subnet.private[1]
+aws_subnet.public[0]
+aws_subnet.public[1]
+aws_vpc.main
+#==================================#
+Deployed resources from 02-security_group:
+--------------------------------
+data.terraform_remote_state.vpc
+aws_security_group.eks_cluster
+aws_security_group.eks_nodes
+aws_security_group.kafka
+aws_security_group.opensearch
+aws_security_group.rds
+aws_security_group.redis
+#==================================#
+Deployed resources from 03-iam:
+--------------------------------
+data.aws_iam_policy_document.eks_assume_role
+data.aws_iam_policy_document.eks_node_assume_role
+aws_iam_role.eks_cluster
+aws_iam_role.eks_nodes
+aws_iam_role_policy_attachment.eks_cluster_policy
+aws_iam_role_policy_attachment.eks_cni_policy
+aws_iam_role_policy_attachment.eks_container_registry_policy
+aws_iam_role_policy_attachment.eks_ssm_policy
+aws_iam_role_policy_attachment.eks_vpc_resource_controller
+aws_iam_role_policy_attachment.eks_worker_node_policy
+#==================================#
+Deployed resources from 04-eks:
+--------------------------------
+data.terraform_remote_state.iam
+data.terraform_remote_state.security_groups
+data.terraform_remote_state.vpc
+aws_eks_addon.kube_proxy
+aws_eks_addon.vpc_cni
+aws_eks_cluster.main
+#==================================#
+Deployed resources from 05-node_groups:
+--------------------------------
+data.terraform_remote_state.eks
+data.terraform_remote_state.iam
+data.terraform_remote_state.vpc
+aws_eks_addon.coredns
+aws_eks_node_group.main["on_demand"]
+aws_eks_node_group.main["spot_1"]
+aws_eks_node_group.main["spot_2"]
+#==================================#
+Deployed resources from 06-rds:
+--------------------------------
+data.terraform_remote_state.security_groups
+data.terraform_remote_state.vpc
+aws_db_instance.main
+aws_db_subnet_group.main
+#==================================#
+Deployed resources from 07-kafka:
+--------------------------------
+data.terraform_remote_state.security_groups
+data.terraform_remote_state.vpc
+aws_cloudwatch_log_group.kafka
+aws_msk_cluster.main
+#==================================#
+Deployed resources from 08-redis:
+--------------------------------
+data.terraform_remote_state.security_groups
+data.terraform_remote_state.vpc
+aws_elasticache_replication_group.main
+aws_elasticache_subnet_group.main
+#==================================#
+Deployed resources from 09-opensearch:
+--------------------------------
+data.terraform_remote_state.security_groups
+data.terraform_remote_state.vpc
+aws_opensearch_domain.main
+#==================================#
+Deployed resources from 10-ecr:
+--------------------------------
+aws_ecr_lifecycle_policy.app
+aws_ecr_repository.app
+#==================================#

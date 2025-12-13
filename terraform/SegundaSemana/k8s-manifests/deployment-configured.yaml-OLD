@@ -27,7 +27,7 @@ metadata:
   namespace: desafio-sre
 type: Opaque
 stringData:
-  POSTGRES_PASSWORD: "SOevAM3nY#-p8Hs>ej]_>I$TUWEA"  ###  "REPLACE_WITH_RDS_PASSWORD"
+  POSTGRES_PASSWORD: "YJ8!GNKzVMi|)O.hZrf?~L1HTd#k"  ###  "REPLACE_WITH_RDS_PASSWORD"
 ---
 apiVersion: apps/v1
 kind: Deployment

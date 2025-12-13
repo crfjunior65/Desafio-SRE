@@ -1,0 +1,38 @@
+---
+# k8s/service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: python-app
+  labels:
+    app: python-app
+spec:
+  selector:
+    app: python-app
+  ports:
+    - name: http
+      port: 5000
+      targetPort: 5000
+    - name: metrics
+      port: 9464
+      targetPort: 9464
+  type: ClusterIP
+---
+# ServiceMonitor para Prometheus
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: python-app-monitor
+  labels:
+    release: prometheus
+spec:
+  selector:
+    matchLabels:
+      app: python-app
+  endpoints:
+    - port: metrics
+      interval: 15s
+      path: /metrics
+      honorLabels: true
+  namespaceSelector:
+    any: true

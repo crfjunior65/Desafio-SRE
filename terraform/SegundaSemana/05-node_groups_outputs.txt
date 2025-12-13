@@ -1,7 +1,7 @@
 node_group_arns = {
-  "on_demand" = "arn:aws:eks:us-east-2:870205216049:nodegroup/desafio-sre-junior-eks/desafio-sre-junior-on_demand/d8cd77ba-2764-786f-a1f0-94b4ba5f534b"
-  "spot_1" = "arn:aws:eks:us-east-2:870205216049:nodegroup/desafio-sre-junior-eks/desafio-sre-junior-spot_1/18cd77ba-276e-25d8-f077-939f125209f2"
-  "spot_2" = "arn:aws:eks:us-east-2:870205216049:nodegroup/desafio-sre-junior-eks/desafio-sre-junior-spot_2/1ecd77ba-2764-4155-d029-3030d08fc319"
+  "on_demand" = "arn:aws:eks:us-east-2:870205216049:nodegroup/desafio-sre-junior-eks/desafio-sre-junior-on_demand/3acd8cbf-4cf8-a6e9-1ffd-42034d55efcd"
+  "spot_1" = "arn:aws:eks:us-east-2:870205216049:nodegroup/desafio-sre-junior-eks/desafio-sre-junior-spot_1/58cd8cbf-4cfa-fd8b-acb3-0d8d4ac304c5"
+  "spot_2" = "arn:aws:eks:us-east-2:870205216049:nodegroup/desafio-sre-junior-eks/desafio-sre-junior-spot_2/54cd8cbf-4cfa-cdf6-de7b-f123260b7205"
 }
 node_group_ids = {
   "on_demand" = "desafio-sre-junior-eks:desafio-sre-junior-on_demand"

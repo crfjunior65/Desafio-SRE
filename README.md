@@ -1,8 +1,56 @@
-# 🚀 Desafio SRE - Elvenworks
+# 🚀 Desafio SRE - ElvenWorks
 
 ## 📋 Sobre o Projeto
 
 Projeto desenvolvido como parte do Nivelamento Tecnico e processo de Inclusão na Equipe para a posição de SRE / DevOps na Elvenworks. O desafio consiste em implementar uma stack completa de DevOps/SRE, desde a containerização de uma aplicação até o deploy em Kubernetes com monitoramento completo.
+
+## 🛠️ Tecnologias Implementadas nos Desafios
+
+### **Aplicação & Runtime**
+![Python](https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white)
+![Flask](https://img.shields.io/badge/Flask-000000?style=for-the-badge&logo=flask&logoColor=white)
+![Gunicorn](https://img.shields.io/badge/Gunicorn-499848?style=for-the-badge&logo=gunicorn&logoColor=white)
+
+### **Containerização & Orquestração**
+![Docker](https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white)
+![Kubernetes](https://img.shields.io/badge/Kubernetes-326CE5?style=for-the-badge&logo=kubernetes&logoColor=white)
+![Kind](https://img.shields.io/badge/Kind-326CE5?style=for-the-badge&logo=kubernetes&logoColor=white)
+
+### **Cloud & Infraestrutura**
+![AWS](https://img.shields.io/badge/AWS-FF9900?style=for-the-badge&logo=amazon-aws&logoColor=white)
+![Terraform](https://img.shields.io/badge/Terraform-623CE4?style=for-the-badge&logo=terraform&logoColor=white)
+![Amazon EKS](https://img.shields.io/badge/Amazon_EKS-FF9900?style=for-the-badge&logo=amazon-eks&logoColor=white)
+![Amazon RDS](https://img.shields.io/badge/Amazon_RDS-527FFF?style=for-the-badge&logo=amazon-rds&logoColor=white)
+![Amazon ElastiCache](https://img.shields.io/badge/ElastiCache-FF9900?style=for-the-badge&logo=amazon-aws&logoColor=white)
+
+### **Bancos de Dados & Cache**
+![PostgreSQL](https://img.shields.io/badge/PostgreSQL-316192?style=for-the-badge&logo=postgresql&logoColor=white)
+![Redis](https://img.shields.io/badge/Redis-DC382D?style=for-the-badge&logo=redis&logoColor=white)
+![OpenSearch](https://img.shields.io/badge/OpenSearch-005EB8?style=for-the-badge&logo=opensearch&logoColor=white)
+![Elasticsearch](https://img.shields.io/badge/Elasticsearch-005571?style=for-the-badge&logo=elasticsearch&logoColor=white)
+
+### **Messaging & Streaming**
+![Apache Kafka](https://img.shields.io/badge/Apache_Kafka-231F20?style=for-the-badge&logo=apache-kafka&logoColor=white)
+![Amazon MSK](https://img.shields.io/badge/Amazon_MSK-FF9900?style=for-the-badge&logo=apache-kafka&logoColor=white)
+
+### **CI/CD & GitOps**
+![GitHub Actions](https://img.shields.io/badge/GitHub_Actions-2088FF?style=for-the-badge&logo=github-actions&logoColor=white)
+![ArgoCD](https://img.shields.io/badge/ArgoCD-EF7B4D?style=for-the-badge&logo=argo&logoColor=white)
+![Docker Hub](https://img.shields.io/badge/Docker_Hub-2496ED?style=for-the-badge&logo=docker&logoColor=white)
+![Git](https://img.shields.io/badge/Git-F05032?style=for-the-badge&logo=git&logoColor=white)
+
+### **Observabilidade & Monitoramento**
+![Prometheus](https://img.shields.io/badge/Prometheus-E6522C?style=for-the-badge&logo=prometheus&logoColor=white)
+![Grafana](https://img.shields.io/badge/Grafana-F46800?style=for-the-badge&logo=grafana&logoColor=white)
+![Jaeger](https://img.shields.io/badge/Jaeger-66CFE3?style=for-the-badge&logo=jaeger&logoColor=white)
+![OpenTelemetry](https://img.shields.io/badge/OpenTelemetry-000000?style=for-the-badge&logo=opentelemetry&logoColor=white)
+![Fluent Bit](https://img.shields.io/badge/Fluent_Bit-49BDA5?style=for-the-badge&logo=fluentbit&logoColor=white)
+
+### **Ferramentas & Utilitários**
+![Helm](https://img.shields.io/badge/Helm-0F1689?style=for-the-badge&logo=helm&logoColor=white)
+![NGINX](https://img.shields.io/badge/NGINX-009639?style=for-the-badge&logo=nginx&logoColor=white)
+![Linux](https://img.shields.io/badge/Linux-FCC624?style=for-the-badge&logo=linux&logoColor=black)
+![Bash](https://img.shields.io/badge/Bash-4EAA25?style=for-the-badge&logo=gnu-bash&logoColor=white)
 
 ---
 
@@ -18,8 +66,8 @@ Projeto desenvolvido como parte do Nivelamento Tecnico e processo de Inclusão n
 ### Segunda Semana
 - ✅ Provisionar infraestrutura AWS (VPC, EKS, RDS, Kafka, Redis, OpenSearch)
 - ✅ CI/CD com ArgoCD
-- ⏳ APM e coleta de métricas
-- ⏳ Logs centralizados no OpenSearch
+- ✅ APM e coleta de métricas
+- ✅ Logs centralizados no OpenSearch
 - ✅ Organização de IaC
 - ✅ Documentação completa
 
@@ -487,6 +535,13 @@ kubectl port-forward -n monitoring svc/prometheus-server-grafana 3000:80
 ### ✅ Desafio 6 - Infraestrutura AWS
 **Status:** Concluído
 
+### ✅ Desafio 7 - CI/CD com ArgoCD
+**Status:** Concluído
+
+### ✅ Desafio 8 - APM e Coleta de Métricas
+**Status:** Concluído
+
+
 **Implementação:**
 - Infraestrutura completa provisionada na AWS usando Terraform
 - Arquitetura modular com remote state isolado por componente
@@ -571,6 +626,7 @@ kubectl port-forward -n monitoring svc/prometheus-server-grafana 3000:80
 08-redis/              # ElastiCache Redis replicado
 09-opensearch/         # OpenSearch 2 nodes
 10-ecr/                # Container Registry
+11-observability       # Observabilidade
 ```
 
 **Desafios Técnicos Superados:**
@@ -619,8 +675,15 @@ aws elasticache describe-cache-clusters --region us-east-2
 ```
 
 ---
-### ✅ Desafio 7 - CI/CD com ArgoCD
+### ✅ Desafio 7 - CI/CD com ArgoCD 🚀
 **Status:** Concluído
+
+![GitHub Actions](https://img.shields.io/badge/GitHub_Actions-2088FF?style=for-the-badge&logo=github-actions&logoColor=white)
+![ArgoCD](https://img.shields.io/badge/ArgoCD-EF7B4D?style=for-the-badge&logo=argo&logoColor=white)
+![Docker](https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white)
+![Kubernetes](https://img.shields.io/badge/Kubernetes-326CE5?style=for-the-badge&logo=kubernetes&logoColor=white)
+![AWS](https://img.shields.io/badge/AWS-FF9900?style=for-the-badge&logo=amazon-aws&logoColor=white)
+![Flask](https://img.shields.io/badge/Flask-000000?style=for-the-badge&logo=flask&logoColor=white)
 
 **Implementação:**
 - Pipeline CI/CD completo com GitHub Actions e ArgoCD
@@ -629,17 +692,172 @@ aws elasticache describe-cache-clusters --region us-east-2
 - Sincronização automática de manifests Kubernetes
 - Aplicação rodando em EKS com 3 réplicas
 
-**Componentes:**
+**🛠️ Stack Tecnológica:**
+- 🐙 **GitHub Actions** - CI/CD Pipeline
+- 🔄 **ArgoCD** - GitOps Deployment
+- 🐳 **Docker Hub** - Container Registry
+- ☸️ **Kubernetes** - Orquestração
+- 🌐 **AWS Load Balancer** - Exposição externa
+- 📊 **Prometheus** - Métricas integradas
 
-**GitHub Actions:**
-- Workflow: `.github/workflows/build-deploy.yml`
-- Trigger: Push em `main` com mudanças em `app/**`
-- Build de imagem Docker otimizada
-- Push para Docker Hub: `crfjunior65/flask-app:latest`
-- Tempo de execução: ~2-3 minutos
+**🔧 Componentes Detalhados:**
 
-**ArgoCD:**
-- Instalado no namespace `argocd`
+**GitHub Actions Pipeline:**
+- 📁 **Workflow:** `.github/workflows/build-deploy.yml`
+- 🎯 **Trigger:** Push em `main` com mudanças em `app/**`
+- 🏗️ **Build:** Imagem Docker otimizada multi-stage
+- 📤 **Push:** Docker Hub `crfjunior65/flask-app:latest`
+- ⏱️ **Tempo:** ~2-3 minutos
+- 🔍 **Validação:** Testes de sintaxe e build
+
+**ArgoCD GitOps:**
+- 📦 **Namespace:** `argocd`
+- 🎯 **Application:** `desafio-sre-app`
+- 📂 **Source:** Repositório Git (branch `main`)
+- 📍 **Path:** `terraform/SegundaSemana/k8s-manifests/`
+- 🔄 **Sync Policy:** Automático com self-heal
+- 🧹 **Prune:** Habilitado para limpeza automática
+- 🔐 **RBAC:** Configurado com menor privilégio
+
+**Kubernetes Manifests:**
+- 🚀 **Deployment:** 3 réplicas Flask com rolling updates
+- 🌐 **Service:** LoadBalancer para acesso externo
+- ⚙️ **ConfigMap:** Endpoints RDS, Redis, Kafka, OpenSearch
+- 🔐 **Secret:** Credenciais PostgreSQL criptografadas
+- 🏥 **Health Checks:** Liveness e readiness probes
+- 📊 **Resources:** CPU/Memory limits e requests
+
+**🔄 Fluxo CI/CD Completo:**
+```
+1. 👨‍💻 Developer push código → GitHub
+2. 🔍 GitHub Actions detecta mudança em app/**
+3. 🏗️ Build da imagem Docker multi-stage
+4. 🧪 Execução de testes automatizados
+5. 📤 Push para Docker Hub (crfjunior65/flask-app:latest)
+6. 👁️ ArgoCD detecta mudança no Git repository
+7. 🔄 ArgoCD sincroniza manifests com EKS cluster
+8. ☸️ Kubernetes executa rolling update dos pods
+9. 🌐 LoadBalancer roteia tráfego para novos pods
+10. 📊 Métricas disponíveis no Prometheus
+```
+
+**📦 Recursos Deployados:**
+```
+NAMESPACE       RECURSO                 REPLICAS    STATUS      FUNCIONALIDADE
+desafio-sre     flask-app               3/3         Running     Aplicação principal
+desafio-sre     flask-app-service       1           Active      LoadBalancer AWS
+desafio-sre     flask-config            1           Active      Configurações
+desafio-sre     postgres-secret         1           Active      Credenciais DB
+```
+
+**🌐 Endpoints da Aplicação:**
+- 🏠 `/` - Status da aplicação e health check básico
+- 🏥 `/health` - Health check detalhado (DB + Redis)
+- 📋 `/version` - Versão, deployed_by e informações build
+- 🔴 `/redis` - Teste conexão Redis com operações R/W
+- 🐘 `/postgres` - Teste conexão PostgreSQL com queries
+- 📊 `/metrics` - Métricas Prometheus (HTTP, DB, Redis)
+- 🧪 `/testes` - Endpoint para validação de funcionalidades
+
+**⏱️ Performance do Pipeline:**
+- 🏗️ **GitHub Actions:** 2-3 minutos (build + push)
+- 🔄 **ArgoCD Sync:** 1-2 minutos (detecção + sync)
+- ☸️ **Kubernetes Rollout:** 1-2 minutos (rolling update)
+- 🌐 **LoadBalancer Update:** 30-60 segundos
+- **⚡ Total:** 4-7 minutos (zero downtime)
+
+**🔍 Validação e Monitoramento:**
+```bash
+# Verificar ArgoCD Application
+kubectl get application -n argocd desafio-sre-app -o wide
+
+# Verificar pods e status
+kubectl get pods -n desafio-sre -o wide
+kubectl describe deployment -n desafio-sre flask-app
+
+# Obter URL do LoadBalancer
+kubectl get svc -n desafio-sre flask-app-service -o jsonpath='{.status.loadBalancer.ingress[0].hostname}'
+
+# Testar todos os endpoints
+curl http://<LOAD_BALANCER_URL>/health
+curl http://<LOAD_BALANCER_URL>/version
+curl http://<LOAD_BALANCER_URL>/redis
+curl http://<LOAD_BALANCER_URL>/postgres
+curl http://<LOAD_BALANCER_URL>/metrics
+
+# Verificar logs da aplicação
+kubectl logs -n desafio-sre -l app=flask-app --tail=100 -f
+
+# Monitorar ArgoCD sync status
+kubectl get application -n argocd desafio-sre-app -w
+```
+
+**📁 Estrutura de Arquivos:**
+```
+.github/workflows/
+└── build-deploy.yml              # Pipeline CI/CD
+
+terraform/SegundaSemana/
+├── k8s-manifests/
+│   ├── deployment.yaml           # Flask app deployment
+│   ├── service.yaml              # LoadBalancer service
+│   ├── configmap.yaml            # Configurações aplicação
+│   └── secret.yaml               # Credenciais PostgreSQL
+├── k8s-argocd/
+│   └── application.yaml          # ArgoCD application
+└── argocd-application.yaml       # ArgoCD app definition
+```
+
+**🚨 Desafios Técnicos Superados:**
+
+1. **🔗 Symlinks no Repositório Git**
+   - **❌ Problema:** ArgoCD bloqueou sync devido a symlinks de venv Python
+   - **⚠️ Erro:** "Illegal filepath in repo" - security violation
+   - **✅ Solução:** `git rm -r --cached venv/` + `.gitignore` atualizado
+   - **📚 Aprendizado:** Python venv nunca deve ser commitado
+
+2. **🏷️ Nome Incorreto da Imagem Docker**
+   - **❌ Problema:** Workflow usava `desafio-sre-app` mas deveria ser `flask-app`
+   - **💥 Impacto:** Imagens enviadas para repositório errado no Docker Hub
+   - **✅ Solução:** Padronização `IMAGE_NAME` no workflow e manifests
+   - **📚 Aprendizado:** Definir naming convention desde o início
+
+3. **⚡ Função Duplicada no Flask**
+   - **❌ Problema:** Duas funções `version()` causando `AssertionError`
+   - **💥 Erro:** "View function mapping is overwriting an existing endpoint"
+   - **✅ Solução:** Renomear segunda função para `testes()`
+   - **📚 Aprendizado:** Validação local antes de push obrigatória
+
+4. **💾 Cache do ArgoCD Repo Server**
+   - **❌ Problema:** ArgoCD mantinha cache com symlinks inválidos
+   - **✅ Solução:** `kubectl delete pod -n argocd -l app.kubernetes.io/name=argocd-repo-server`
+   - **📚 Aprendizado:** Cache management é crítico em GitOps
+
+5. **🔐 Gerenciamento de Secrets**
+   - **❌ Problema:** Secret PostgreSQL não criado automaticamente
+   - **✅ Solução:** Manifest dedicado + ArgoCD sync
+   - **📚 Aprendizado:** Secrets devem ser tratados separadamente
+
+**✅ Boas Práticas DevOps Implementadas:**
+- 🔄 **GitOps:** Manifests versionados com single source of truth
+- 🏷️ **Imagens Imutáveis:** Tags com SHA do commit para rastreabilidade
+- 🏥 **Health Checks:** Liveness, readiness e startup probes
+- 🔄 **Rolling Updates:** Zero downtime deployments com strategy
+- 🔧 **Self-Healing:** ArgoCD reverte mudanças manuais automaticamente
+- 📊 **Observabilidade:** Métricas Prometheus integradas nativamente
+- 🔐 **Security:** Secrets management separado do código
+- 📝 **Documentation:** Manifests autodocumentados com annotations
+- 🏗️ **Infrastructure as Code:** Tudo versionado e reproduzível
+
+**🔮 Roadmap de Melhorias:**
+- [ ] 🏷️ Implementar semantic versioning (v1.0.0) com git tags
+- [ ] 🧪 Adicionar testes automatizados (unit + integration)
+- [ ] 🌍 Implementar multi-environment (dev, staging, prod)
+- [ ] 📢 Configurar notificações ArgoCD (Slack/Teams/Email)
+- [ ] 🛡️ Adicionar security scanning (Trivy/Snyk) no pipeline
+- [ ] 📊 Implementar deployment metrics e SLI/SLO
+- [ ] 🔄 Configurar blue-green deployments para releases críticas
+- [ ] 🎯 Implementar feature flags para releases graduais
 - Application: `desafio-sre-app`
 - Source: Repositório Git (branch `main`)
 - Path: `terraform/SegundaSemana/k8s-manifests/`
@@ -721,7 +939,7 @@ curl http://<LOAD_BALANCER_URL>/version
    - **Problema:** Workflow usava `desafio-sre-app` mas deveria ser `flask-app`
    - **Impacto:** Imagens sendo enviadas para repositório errado no Docker Hub
    - **Solução:** Corrigir `IMAGE_NAME` no workflow e deployment manifest
-   - **Aprendizado:** Padronizar nomes desde o início do projeto
+   - **Aprendizado:** Padronizar nomes dsesde o início do projeto
 
 3. **Função Duplicada no Código**
    - **Problema:** Duas funções com nome `version()` causando `AssertionError`
@@ -757,11 +975,196 @@ curl http://<LOAD_BALANCER_URL>/version
 
 ---
 
+### ✅ Desafio 8 - APM e Coleta de Métricas 📊
+**Status:** Concluído
+
+![Prometheus](https://img.shields.io/badge/Prometheus-E6522C?style=for-the-badge&logo=prometheus&logoColor=white)
+![Grafana](https://img.shields.io/badge/Grafana-F46800?style=for-the-badge&logo=grafana&logoColor=white)
+![Jaeger](https://img.shields.io/badge/Jaeger-66CFE3?style=for-the-badge&logo=jaeger&logoColor=white)
+![OpenTelemetry](https://img.shields.io/badge/OpenTelemetry-000000?style=for-the-badge&logo=opentelemetry&logoColor=white)
+![Fluent Bit](https://img.shields.io/badge/Fluent_Bit-49BDA5?style=for-the-badge&logo=fluentbit&logoColor=white)
+![Elasticsearch](https://img.shields.io/badge/Elasticsearch-005571?style=for-the-badge&logo=elasticsearch&logoColor=white)
+![OpenSearch](https://img.shields.io/badge/OpenSearch-005EB8?style=for-the-badge&logo=opensearch&logoColor=white)
+
+**Implementação:**
+- Stack completa de observabilidade implementada no EKS
+- Coleta de métricas de aplicação e infraestrutura
+- Distributed tracing para APM
+- Logs centralizados no OpenSearch existente
+- Dashboards e alertas configurados
+
+**Componentes Implementados:**
+
+**Prometheus Stack (kube-prometheus-stack):**
+- **Prometheus Server:** Coleta e armazenamento de métricas (retenção 7d, 10Gi)
+- **Grafana:** Interface visual com dashboards (LoadBalancer, senha: admin123)
+- **AlertManager:** Gerenciamento de alertas (2Gi storage)
+- **Node Exporter:** Métricas dos nodes (CPU, memória, disco)
+- **Kube State Metrics:** Métricas do Kubernetes (pods, deployments)
+
+**Jaeger (Distributed Tracing):**
+- **Jaeger Collector:** Recebe traces das aplicações (ClusterIP:14250/14268)
+- **Jaeger Query:** Interface web para visualizar traces (LoadBalancer:16686)
+- **Jaeger Agent:** DaemonSet que coleta traces localmente
+- **Elasticsearch:** Armazenamento dos traces (5Gi storage)
+
+**OpenTelemetry Collector:**
+- **Modo DaemonSet:** Coleta telemetria de todos os nodes
+- **Receivers:** OTLP (gRPC:4317, HTTP:4318) e Prometheus
+- **Exporters:** Prometheus (métricas) e Jaeger (traces)
+- **Processors:** Batch processing e memory limiter (512MB)
+
+**Fluent Bit (Log Collection):**
+- **DaemonSet:** Coleta logs de containers e sistema
+- **Kubernetes Integration:** Parsing automático de logs K8s
+- **OpenSearch Output:** Envio para cluster OpenSearch existente
+- **IAM Role:** Permissões para escrita no OpenSearch
+
+**Namespaces Criados:**
+```
+NAMESPACE       COMPONENTES
+monitoring      Prometheus, Grafana, AlertManager, OpenTelemetry
+tracing         Jaeger (Collector, Query, Agent, Elasticsearch)
+logging         Fluent Bit DaemonSet
+```
+
+**Métricas Coletadas:**
+- **Aplicação Flask:** Requests HTTP, latência, erros, métricas customizadas
+- **Kubernetes:** Pods, deployments, services, nodes, recursos
+- **Infraestrutura:** CPU, memória, disco, network dos nodes
+- **Banco de Dados:** Conexões, queries (via instrumentação)
+- **Cache Redis:** Operações, latência, hit rate
+
+**Dashboards Grafana:**
+- **Kubernetes Cluster Monitoring (ID: 7249):** Overview do cluster
+- **Kubernetes Pod Monitoring (ID: 6417):** Métricas de pods
+- **Flask App Monitoring (ID: 3681):** Métricas da aplicação
+- **Dashboards customizados:** Configuráveis via providers
+
+**Alertas Configurados:**
+- **High CPU Usage:** >80% por 5 minutos
+- **High Memory Usage:** >85% por 5 minutos
+- **Pod Restart Loop:** >3 restarts em 10 minutos
+- **Application Errors:** >5% error rate por 2 minutos
+- **Database Connection Issues:** Falha de conexão
+
+**Logs Centralizados:**
+- **Índices OpenSearch:**
+  - `fluentbit-k8s`: Logs de containers Kubernetes
+  - `fluentbit-host`: Logs de sistema dos nodes
+- **Parsing Automático:** JSON logs, multiline, Kubernetes metadata
+- **Filtros:** Namespace, pod, container, severity level
+
+**Instrumentação da Aplicação:**
+- **Arquivo Base:** `app/app.py` (métricas Prometheus existentes)
+- **Versão Instrumentada:** `app/app-instrumented.py` (OpenTelemetry opcional)
+- **Dependências APM:** `app/requirements-observability.txt`
+- **Traces Distribuídos:** Spans para DB, Redis, HTTP requests
+
+**Arquitetura de Observabilidade:**
+```
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                          EKS Cluster (us-east-2)                             │
+│                                                                              │
+│  ┌────────────────────────────────────────────────────────────────────────┐ │
+│  │                    Namespace: monitoring                                │ │
+│  │  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐                │ │
+│  │  │ Prometheus   │  │   Grafana    │  │ AlertManager │                │ │
+│  │  │ (Métricas)   │  │(Dashboards)  │  │  (Alertas)   │                │ │
+│  │  └──────┬───────┘  └──────────────┘  └──────────────┘                │ │
+│  │         │                                                              │ │
+│  │         │ ┌──────────────┐  ┌──────────────┐                          │ │
+│  │         └►│ Node Exporter│  │OpenTelemetry │                          │ │
+│  │           │ (Nodes)      │  │ Collector    │                          │ │
+│  │           └──────────────┘  └──────────────┘                          │ │
+│  └────────────────────────────────────────────────────────────────────────┘ │
+│                                                                              │
+│  ┌────────────────────────────────────────────────────────────────────────┐ │
+│  │                    Namespace: tracing                                   │ │
+│  │  ┌──────────────┐  ┌──────────────┐  ┌──────────────┐                │ │
+│  │  │    Jaeger    │  │ Elasticsearch│  │  Jaeger UI   │                │ │
+│  │  │  (Collector) │  │  (Storage)   │  │ (Interface)  │                │ │
+│  │  └──────────────┘  └──────────────┘  └──────────────┘                │ │
+│  └────────────────────────────────────────────────────────────────────────┘ │
+│                                                                              │
+│  ┌────────────────────────────────────────────────────────────────────────┐ │
+│  │                    Namespace: logging                                   │ │
+│  │  ┌──────────────┐                                                     │ │
+│  │  │  Fluent Bit  │────────────────────────────────────────────────────┼─┤
+│  │  │ (DaemonSet)  │                                                     │ │
+│  │  └──────────────┘                                                     │ │
+│  └────────────────────────────────────────────────────────────────────────┘ │
+└─────────────────────────────────────────────────────────────────────────────┘
+                                    │
+                                    ▼
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                    OpenSearch (us-east-2) - Já Existente                     │
+│  ┌──────────────┐  ┌──────────────┐                                        │
+│  │ OpenSearch   │  │ OpenSearch   │                                        │
+│  │   Node 1     │  │   Node 2     │                                        │
+│  └──────────────┘  └──────────────┘                                        │
+└─────────────────────────────────────────────────────────────────────────────┘
+```
+
+**Validação e Acesso:**
+```bash
+# Verificar pods de observabilidade
+kubectl get pods -n monitoring
+kubectl get pods -n tracing
+kubectl get pods -n logging
+
+# Acessar Grafana
+kubectl port-forward -n monitoring svc/prometheus-stack-grafana 3000:80
+# http://localhost:3000 (admin/admin123)
+
+# Acessar Jaeger
+kubectl port-forward -n tracing svc/jaeger-query 16686:16686
+# http://localhost:16686
+
+# Acessar Prometheus
+kubectl port-forward -n monitoring svc/prometheus-stack-kube-prom-prometheus 9090:9090
+# http://localhost:9090
+
+# Verificar logs no OpenSearch
+# Acessar via OpenSearch Dashboards (configurado no Desafio 6)
+```
+
+**Localização:**
+- Módulo Terraform: `terraform/SegundaSemana/11-observability/`
+- Script de Deploy: `terraform/SegundaSemana/deploy-observability.sh`
+- Instrumentação: `app/app-instrumented.py` (opcional)
+- Dependências APM: `app/requirements-observability.txt`
+
+**Custo Adicional Estimado:**
+- **EBS Volumes (Prometheus/Grafana/Jaeger):** ~$20/mês
+- **LoadBalancers (Grafana/Jaeger):** ~$20/mês
+- **Compute overhead:** ~$5/mês
+- **Total adicional:** ~$45/mês
+
+**Boas Práticas Implementadas:**
+- ✅ Observabilidade completa: Métricas, logs e traces
+- ✅ Dashboards padronizados da comunidade
+- ✅ Alertas proativos para problemas críticos
+- ✅ Logs centralizados com parsing automático
+- ✅ IAM roles com menor privilégio
+- ✅ Persistent storage para dados históricos
+- ✅ Service discovery automático
+- ✅ Instrumentação não-intrusiva
+
+**Melhorias Futuras:**
+- [ ] Implementar distributed tracing na aplicação Flask
+- [ ] Configurar dashboards customizados para métricas de negócio
+- [ ] Adicionar alertas via Slack/Email
+- [ ] Implementar SLI/SLO monitoring
+- [ ] Configurar retention policies otimizadas
+
+---
+
 ### Segunda Semana
-- [ ] Deploy com ArgoCD
-- [ ] Implementar APM
-- [ ] Centralizar logs no OpenSearch
-- [ ] Documentação completa
+- ✅ Deploy com ArgoCD
+- ✅ Implementar APM
+- ✅ Centralizar logs no OpenSearch
+- ✅ Documentação completa
 
 ---
 
@@ -774,6 +1177,6 @@ SRE / DevOps - ElvenWorks
 
 ---
 
-**Última atualização:** 04/12/2024  
-**Versão:** 1.2  
-**Status:** Desafio 7 Concluído ✅
+**Última atualização:** 13/12/2024  
+**Versão:** 1.3  
+**Status:** Desafios 7 e 8 Concluídos ✅

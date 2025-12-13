@@ -56,3 +56,10 @@ opensearch_master_password = "SuaSenhaSegura123!"
 # ECR
 ecr_repository_name = "desafio-sre-junior-repo"
 ecr_image_tag       = "v1.0.0"
+
+# Observability (Desafio 8)
+grafana_admin_password  = "admin123"
+prometheus_retention    = "7d"
+prometheus_storage_size = "10Gi"
+grafana_storage_size    = "5Gi"
+jaeger_storage_size     = "5Gi"

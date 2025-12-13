@@ -1,0 +1,71 @@
+---
+# deployment.yaml da sua aplicação
+# k8s/deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: python-app
+  labels:
+    app: python-app
+    version: v1
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: python-app
+  template:
+    metadata:
+      labels:
+        app: python-app
+        version: v1
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "9464"
+        prometheus.io/path: "/metrics"
+    spec:
+      containers:
+        - name: app
+          image: seu-registry/python-app:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 5000
+              name: http
+            - containerPort: 9464
+              name: metrics
+          env:
+            - name: OTEL_SERVICE_NAME
+              value: "python-app"
+            - name: OTEL_EXPORTER_JAEGER_AGENT_HOST
+              value: "jaeger-agent.observability"
+            - name: OTEL_EXPORTER_JAEGER_AGENT_PORT
+              value: "6831"
+            - name: RDS_HOST
+              valueFrom:
+                secretKeyRef:
+                  name: database-secret
+                  key: host
+            - name: REDIS_HOST
+              value: "redis-master.default.svc.cluster.local"
+          resources:
+            requests:
+              memory: "256Mi"
+              cpu: "250m"
+            limits:
+              memory: "512Mi"
+              cpu: "500m"
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 5000
+            initialDelaySeconds: 30
+            periodSeconds: 10
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 5000
+            initialDelaySeconds: 5
+            periodSeconds: 5
+          # Configuração para tracing distribuído
+          envFrom:
+            - configMapRef:
+                name: opentelemetry-config

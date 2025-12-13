@@ -1,14 +1,14 @@
 nat_gateway_ids = [
-  "nat-010deb22d4ac7dec2",
-  "nat-0a33f9cabe8f53284",
+  "nat-0483f1ac1acb8aedb",
+  "nat-0d7a5f37b390e4d01",
 ]
 private_subnet_ids = [
-  "subnet-02f6a1f0d5116cdc9",
-  "subnet-00c3e580209eead09",
+  "subnet-0806d3cf7d06c04b2",
+  "subnet-03191b54af6ce5ac2",
 ]
 public_subnet_ids = [
-  "subnet-0823e30ed2d9e130a",
-  "subnet-06b4185fc465fee0f",
+  "subnet-068f93ecc74223470",
+  "subnet-0f450acfc51b731a0",
 ]
 vpc_cidr = "10.100.0.0/16"
-vpc_id = "vpc-0d247a3a5d8285cf8"
+vpc_id = "vpc-0747066f2f2d21394"
